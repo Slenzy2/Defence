@@ -41,14 +41,14 @@
                 <q-list separator v-for="n in 15" :key="n" >
                 <q-item clickable class="row text-center q-mb-sm bg-white" style="border-radius: 4px">
                   <div class="row col-9">
-                    <q-item-section  >Request From DDA</q-item-section>
-                    <q-item-section>Network is not working and the windows </q-item-section>
-                    <q-item-section>Oct /13/2021 : 10:30am.</q-item-section>
+                    <q-item-section  >Username </q-item-section>
+                    <q-item-section>ROLE </q-item-section>
+                    <q-item-section>Department</q-item-section>
                   </div>
                   <q-item-section>
                     <div class="row justify-evenly">
-                      <q-btn label="Forward" class="bg-negative text-white text-subtitle2" style="width: 40%;"/>
-                      <q-btn label="Comments" class="bg-negative text-white text-subtitle2" style="width: 40%;"/>
+                      <q-btn label="Edit password" class="bg-negative text-white text-subtitle2" style="width: 40%;"/>
+                      <q-btn label="Delete" class="bg-red text-white text-subtitle2" style="width: 40%;"/>
                     </div>
                   </q-item-section>
                 </q-item>
