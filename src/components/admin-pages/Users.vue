@@ -47,7 +47,7 @@
                   </div>
                   <q-item-section>
                     <div class="row justify-evenly">
-                      <q-btn label="Edit password" class="bg-negative text-white text-subtitle2" style="width: 40%;"/>
+                      <q-btn label="Edit user" class="bg-negative text-white text-subtitle2" style="width: 40%;"/>
                       <q-btn label="Delete" class="bg-red text-white text-subtitle2" style="width: 40%;"/>
                     </div>
                   </q-item-section>
