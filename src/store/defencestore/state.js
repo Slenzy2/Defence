@@ -1,8 +1,7 @@
 export default function () {
   return {
-    names: [
-      'Daniel',
-      'Don'
-    ]
+    token: null,
+    departments: [],
+
   }
 }
