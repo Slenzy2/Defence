@@ -124,9 +124,6 @@ import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   name: 'MainLayout',
-  data(){
-    // adminLogged: this.$router.currentRoute.value.path.split('/').includes('admin')
-  },
   components: {
     EssentialLink, AdminEssentialLink
   },
@@ -147,7 +144,6 @@ export default defineComponent({
     }
   },
   mounted() {
-    // console.log(this.$router.currentRoute.value.path.split('/').includes('admin'))
     setInterval(() => this.setTime(), 1000)
   },
   methods: {
