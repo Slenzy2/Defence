@@ -44,7 +44,7 @@
       show-if-above
       bordered
       style="overflow-y:hidden"
-      v-if="$router.currentRoute.value.path !== '/' && $router.currentRoute.value.path !== '/admin' " 
+      v-if="$router.currentRoute.value.path !== '/admin' && $router.currentRoute.value.path !== '/admin/users' "
     >
       <q-list>
         <EssentialLink  />
@@ -57,7 +57,7 @@
       show-if-above
       bordered
       style="overflow-y:hidden"
-      v-if="$router.currentRoute.value.path !== '/' && $router.currentRoute.value.path !== '/admin' " 
+      v-if="$router.currentRoute.value.path == '/admin' && $router.currentRoute.value.path == '/admin/users' "
     >
       <q-list>
         <AdminEssentialLink  />
