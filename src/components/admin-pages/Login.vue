@@ -16,14 +16,14 @@
    <p class="text-center text-h4 text-bold text-secondary">Admin Login</p>
 
    <div class="q-px-xl">
-     <q-input rounded outlined elevated v-model="text" placeholder="Username" class="q-mb-xl q-mt-md q-mx-auto" standout="bg-white" color="white" style="width:60%">
+     <q-input rounded outlined elevated v-model="username" placeholder="Username" class="q-mb-xl q-mt-md q-mx-auto" standout="bg-white" color="white" style="width:60%">
         <template v-slot:append>
           <q-avatar>
             <q-icon name="person" size="1.8rem"/>
           </q-avatar>
         </template>
       </q-input>
-      <q-input rounded outlined v-model="text" placeholder="Password" class="q-mb-xl q-mx-auto" standout="bg-white" color="white" style="width:60%;">
+      <q-input rounded outlined v-model="password" placeholder="Password" type = "password" class="q-mb-xl q-mx-auto" standout="bg-white" color="white" style="width:60%;">
         <template v-slot:append>
           <q-avatar>
             <q-icon name="lock" size="1.8rem"/>
@@ -33,10 +33,7 @@
    </div>
 
 <!-- Sign in Button  -->
-   <q-btn @click="this.$router.push('/admin/users')" unelevated rounded color="secondary" label="Login"  class="q-mx-auto q-mb-md"  style="width: 30%;"/>
-
-<!-- Forgotten Password link  -->
-   <a href="" class="text-center text-italic text-subtitle1 text-secondary" style="text-decoration: none">Having a problem login in?</a>
+   <q-btn @click="adminLogin" unelevated rounded color="secondary" label="Login"  class="q-mx-auto q-mb-md"  style="width: 30%;"/>
 
   </div>
 
@@ -44,8 +41,43 @@
 </template>
 
 <script>
+import { Notify } from 'quasar';
+import { useStore } from 'vuex';
+import { useRoute } from 'vue-router';
+let $store = useStore();
+let $route = useRoute();
+
 export default {
-  name: 'login'
+  name: 'login',
+  data(){
+    return{
+      username: "",
+      password: ""
+    }
+  },
+  methods: {
+    adminLogin(){
+      // this.$router.push('/admin/users');
+      if(this.username !== "" && this.password !== ""){
+        this.$store.dispatch('defencestore/adminLogin', {username: this.username, password: this.password})
+        .then(()=>{
+          // if(res.status === 200 || res.status === 201){
+            Notify.create({
+              message: 'Login Success.',
+              caption: 'Admin successfully authenticated.',
+              color: 'blue'
+            })
+            this.$router.replace('/admin/users')
+        })
+      }else{
+        Notify.create({
+          message: 'Login Failure.',
+          caption: 'Complete filling the form before submitting.',
+          color: 'red'
+        })
+      }
+    }
+  }
 }
 </script>
 

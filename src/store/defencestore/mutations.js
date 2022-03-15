@@ -4,3 +4,7 @@ export function addName (state, payload) {
     state.names = [...old, payload]
 }
 
+export function saveToken (state, payload) {
+    state.adminToken = payload.token;
+}
+

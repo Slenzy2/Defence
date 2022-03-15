@@ -99,7 +99,7 @@ export default defineComponent({
   },
   mounted() {
     setInterval(() => this.setTime(), 1000);
-    console.log(this.$router.currentRoute.value.path);
+    // console.log(this.$router.currentRoute.value.path);
   },
   methods: {
     setTime() {
