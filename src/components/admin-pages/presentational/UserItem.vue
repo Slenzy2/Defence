@@ -1,6 +1,6 @@
 <template>
-    
-    <q-item clickable class="row text-center q-mb-sm bg-white" style="border-radius: 4px">
+
+    <q-item clickable class="row text-center bg-white" style="border-radius: 4px">
         <div class="row col-9">
             <q-item-section  >Username </q-item-section>
             <q-item-section>ROLE </q-item-section>
@@ -8,8 +8,8 @@
         </div>
         <q-item-section>
             <div class="row justify-evenly">
-                <q-btn @click="editDialog = true" label="Edit user" class="bg-negative text-white text-subtitle2" style="width: 40%;"/>
-                <q-btn @click="deleteDialog = true" label="Delete" class="bg-red text-white text-subtitle2" style="width: 40%;"/>
+                <q-btn @click="editDialog = true" label="Edit user" class="bg-negative text-white text-subtitle2" style="width: 40%;height: 30px"/>
+                <q-btn @click="deleteDialog = true" label="Delete" class="bg-red text-white text-subtitle2" style="width: 40%; height:30px"/>
             </div>
         </q-item-section>
 
@@ -45,13 +45,13 @@
                 </q-card-section>
 
                 <q-card-actions align="right">
-                <q-btn flat label="Cancel" color="red" v-close-popup />
-                <q-btn label="Save" color="negative"/>
+                <q-btn flat label="Cancel" color="red"  v-close-popup />
+                <q-btn label="Save" color="negative" />
                 </q-card-actions>
             </q-card>
         </q-dialog>
     </q-item>
-              
+
 </template>
 
 <script>
@@ -66,7 +66,7 @@ export default {
         }
     },
     methods: {
-        
+
     }
 }
 </script>

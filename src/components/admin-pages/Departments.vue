@@ -33,11 +33,11 @@
           </q-expansion-item>
 
         </q-card>
-        <q-card flat class="" >
-          <q-scroll-area style="height: 59vh;">
+        <q-card flat class="bg-primary" >
+          <q-scroll-area style="height: 65vh;">
             <div class="text-subtitle2 text-secondary">
               <!-- Incomings -->
-              <q-list separator v-for="n in 15" :key="n" >
+              <q-list separator v-for="n in 15" :key="n"  class="q-mb-sm">
                 <DeptItem />
               </q-list>
             </div>

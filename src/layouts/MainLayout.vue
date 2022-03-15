@@ -57,7 +57,7 @@
       show-if-above
       bordered
       style="overflow-y:hidden"
-      v-if="(this.$router.currentRoute.value.path.split('/').includes('admin')) && this.$router.currentRoute.value.path !== '/admin' " 
+      v-if="(this.$router.currentRoute.value.path.split('/').includes('admin')) && this.$router.currentRoute.value.path !== '/admin' "
     >
       <q-list>
         <AdminEssentialLink  />
