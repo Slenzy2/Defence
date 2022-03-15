@@ -15,7 +15,8 @@
     "vue": "^3.0.0",
     "vue-router": "^4.0.0",
     "vue-signature": "^2.5.4",
-    "vue-signature-pad": "^3.0.2-beta.2"
+    "vue-signature-pad": "^3.0.2-beta.2",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@quasar/app": "^3.0.0"

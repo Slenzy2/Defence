@@ -33,7 +33,8 @@
       <div class="row q-mt-xl">
         <q-space/>
 
-        <q-btn label="Request" style="width:15%; height:50px" v-show="model1 !== null && model2 !== null "  color="secondary" @click="bar = true" class="q-mx-auto" />
+        <q-btn label="Request" style="width:15%; height:50px"  color="secondary" @click="bar = true" class="q-mx-auto" />
+        <!-- <q-btn label="Request" style="width:15%; height:50px" v-show="model1 !== null && model2 !== null "  color="secondary" @click="bar = true" class="q-mx-auto" /> -->
 
         <q-space/>
       </div>
@@ -59,6 +60,18 @@
                     <q-input v-model="text" label="To:" />
                     <q-input v-model="text" label="Title:" />
                     <q-input v-model="text" type="textarea" placeholder="Add Comments" />
+                    <q-input  @change="fileSelected" ref="selectImageFile" type = "file" v-show="false" />
+
+                    <q-banner v-show="selectedFile" dense class="row flex justify-between bg-blue-3 rounded-borders q-mt-md">
+                      <template v-slot:avatar>
+                        <q-icon name="attach_file" color="black" />
+                      </template>
+                      {{selectedFile}}
+                      <!-- <q-space /> -->
+                      <span>
+                        <q-btn round color="red" icon="close" size="0.5rem" class = "q-ml-lg" @click="unSelectFile" />
+                      </span>
+                    </q-banner>
 
                     <div class="row justify-between q-mt-xl " style="height:40px">
                       <div style="width:20%" class="row">
@@ -66,9 +79,10 @@
                       </div>
 
                       <div style="width:13%" class="row justify-evenly">
-                        <q-icon name="attach_file" class="cursor-pointer" size="2rem" v-ripple/>
-                        <q-icon name="image" class="cursor-pointer" size="2rem" v-ripple/>
-                        <q-icon name="delete" class="cursor-pointer" size="2rem" v-ripple/>
+                        <q-btn round color="secondary" icon="attach_file" @click="selectFile" />
+                        <!-- <q-icon name="attach_file" class="cursor-pointer" size="2rem" v-ripple/> -->
+                        <!-- <q-icon name="image" class="cursor-pointer" size="2rem" v-ripple/> -->
+                        <!-- <q-icon name="delete" class="cursor-pointer" size="2rem" v-ripple/> -->
                       </div>
                     </div>
                   </div>
@@ -104,6 +118,7 @@ export default {
       dialog: ref(false),
       bar: ref(false),
       maximizedToggle: ref(true),
+      selectedFile: ref(null),
       options,
        filterFn (val, update) {
         if (val === '') {
@@ -122,6 +137,19 @@ export default {
         })
       }
 
+    }
+  },
+  methods: {
+    selectFile(){
+      this.$refs.selectImageFile.$el.click();
+    },
+    fileSelected(el){
+      el=el.split('\\');
+      el=el[el.length-1];
+      this.selectedFile = el;
+    },
+    unSelectFile(){
+      this.selectedFile = null;
     }
   }
 }
