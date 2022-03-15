@@ -42,12 +42,12 @@
                 to="/mail"
                 >
 
-                <q-item-section avatar>
-                    <q-icon name="storefront" size="1.5rem"/>
-                </q-item-section>
-                <q-item-section>
-                    <q-item-label class="text-left text-subtitle1">Mail</q-item-label>
-                </q-item-section>
+                    <q-item-section avatar>
+                        <q-icon name="storefront" size="1.5rem"/>
+                    </q-item-section>
+                    <q-item-section>
+                        <q-item-label class="text-left text-subtitle1">Mail</q-item-label>
+                    </q-item-section>
                 </q-item>
 
                 <q-item clickable class="q-mb-md q-px-xl"
@@ -59,12 +59,12 @@
                 to="/logs"
                 >
 
-                <q-item-section avatar>
-                    <q-icon name="view_list" size="1.5rem" />
-                </q-item-section>
-                <q-item-section>
-                    <q-item-label class="text-left text-subtitle1">Logs</q-item-label>
-                </q-item-section>
+                    <q-item-section avatar>
+                        <q-icon name="view_list" size="1.5rem" />
+                    </q-item-section>
+                    <q-item-section>
+                        <q-item-label class="text-left text-subtitle1">Logs</q-item-label>
+                    </q-item-section>
                 </q-item>
 
                 <q-item clickable class="q-mb-md q-px-xl"
@@ -76,12 +76,29 @@
                 to="/support"
                 >
 
-                <q-item-section avatar>
-                    <q-icon name="support_agent" size="1.5rem" />
-                </q-item-section>
-                <q-item-section>
-                    <q-item-label class="text-left text-subtitle1">Support</q-item-label>
-                </q-item-section>
+                    <q-item-section avatar>
+                        <q-icon name="support_agent" size="1.5rem" />
+                    </q-item-section>
+                    <q-item-section>
+                        <q-item-label class="text-left text-subtitle1">Support</q-item-label>
+                    </q-item-section>
+                </q-item>
+
+                <q-item clickable class="q-mb-md q-px-xl"
+                active-class="bg-primary text-secondary"
+                v-ripple
+                :active="link === 'Admin'"
+                @click="link = 'Admin'"
+                style="border-radius: 25px"
+                to="/admin"
+                >
+
+                    <q-item-section avatar>
+                        <q-icon name="lock" size="1.5rem" />
+                    </q-item-section>
+                    <q-item-section>
+                        <q-item-label class="text-left text-subtitle1">Admin Login</q-item-label>
+                    </q-item-section>
                 </q-item>
             </q-list>
 

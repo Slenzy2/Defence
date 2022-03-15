@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf" >
-    <q-header v-if="$router.currentRoute.value.path !== '/login' " class="q-pr-xl" >
+    <q-header v-if="$router.currentRoute.value.path !== '/' && $router.currentRoute.value.path !== '/admin' " class="q-pr-xl" >
       <q-toolbar class="flex justify-evenly items-center q-my-auto" style="height:20vh">
 
     <!-- Timer Display  -->
@@ -38,15 +38,29 @@
 
       </q-toolbar>
     </q-header>
-
+    <!-- ESSENTIAL LINK FOR NORMAL USER -->
     <q-drawer
       v-model="leftDrawerOpen"
       show-if-above
       bordered
       style="overflow-y:hidden"
+      v-if="$router.currentRoute.value.path !== '/' && $router.currentRoute.value.path !== '/admin' " 
     >
       <q-list>
         <EssentialLink  />
+      </q-list>
+    </q-drawer>
+
+    <!-- ESSENTIAL LINK FOR ADMIN -->
+    <q-drawer
+      v-model="leftDrawerOpen"
+      show-if-above
+      bordered
+      style="overflow-y:hidden"
+      v-if="$router.currentRoute.value.path !== '/' && $router.currentRoute.value.path !== '/admin' " 
+    >
+      <q-list>
+        <AdminEssentialLink  />
       </q-list>
     </q-drawer>
 
@@ -58,6 +72,7 @@
 
 <script>
 import EssentialLink from 'components/EssentialLink.vue'
+import AdminEssentialLink from 'components/admin-pages/AdminEssentialLink.vue'
 
 const linksList = [
   {
@@ -110,7 +125,7 @@ export default defineComponent({
   name: 'MainLayout',
 
   components: {
-    EssentialLink
+    EssentialLink, AdminEssentialLink
   },
 
   data () {
