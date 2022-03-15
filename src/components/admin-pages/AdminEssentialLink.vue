@@ -5,7 +5,7 @@
     <div class=" column itmes-center">
 
       <q-avatar class="bg-primary q-mx-auto" size="5rem">
-        <img src="" alt="">
+        <q-icon size="3.5rem" color="secondary" name="person"/>
       </q-avatar>
 
       <div class="flex  items-center q-mx-auto q-my-md">
@@ -23,7 +23,7 @@
 
 <!-- Navigation Buttons/Links  -->
     <div class="flex flex-center q-my-xl">
-        <q-list class="q-mb-lg">
+        <q-list class="q-my-lg">
                 <q-item clickable class="q-mb-md q-px-xl"
                 active-class="bg-primary text-secondary"
                 v-ripple
@@ -49,8 +49,17 @@
                         <q-item-label class="text-left text-subtitle1">Deparments</q-item-label>
                     </q-item-section>
                 </q-item>
-                
-            </q-list>
+
+                <q-item clickable class="q-mb-md q-px-xl" active-class="bg-primary text-secondary" to="/admin/messages" style="border-radius: 25px" v-ripple >
+                    <q-item-section avatar>
+                        <q-icon name="message" size="1.5rem" />
+                    </q-item-section>
+                    <q-item-section>
+                        <q-item-label class="text-left text-subtitle1">Messages</q-item-label>
+                    </q-item-section>
+                </q-item>
+
+        </q-list>
 
     </div>
 
@@ -61,7 +70,7 @@
                 active-class="my-menu-link"
                 v-ripple
                 :active="link === 'Logout'"
-                @click="link = 'Logout'" style="width:70%" to="/message">
+                @click="link = 'Logout'" style="width:70%" >
 
                 <q-item-section avatar>
                     <q-icon name="logout" size="2rem" />

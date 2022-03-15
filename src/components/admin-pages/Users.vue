@@ -1,68 +1,57 @@
 <template>
-    <div class="q-pa-md bg-primary" style="height:80vh">
-      <div class="q-gutter-y-md" style="width: 100%">
-        <q-card>
-          <q-expansion-item
-            dense
-            dense-toggle
-            expand-separator
-            icon="add"
-            label="Add User"
-            class = "accordion-label"
-          >
-            <q-card>
-              <q-card-section>
-                <div class="column">
-                  <div class="bg-white col q-px-md column justify-between q-pb-md" style="height:400px;border-radius:0 0 4px 4px">
-                    <div class = "q-mx-xl">
-                      <q-input label="Username:" />
-                      <q-input label="Password:" />
-                      <q-input label="Role:" />
-                      <q-input label="Department:" />
-                    </div>
+  <div class="q-pa-md bg-primary" style="height:80vh">
+    <div class="q-gutter-y-md" style="width: 100%">
+      <q-card>
+        <q-expansion-item
+          dense
+          dense-toggle
+          expand-separator
+          icon="add"
+          label="Add User"
+          class = "accordion-label q-py-md"
 
-                    <div class="row justify-center q-mt-xl " style="height:40px">
-                      <div style="width:20%" class="row">
-                        <q-btn label="Create User" style="width: 100%;" color="negative"/>
-                      </div>
+        >
+          <q-card>
+            <q-card-section>
+              <div class="column">
+                <div class="bg-white col q-px-md column justify-between q-pb-md" style="height:300px;border-radius:0 0 4px 4px">
+                  <div class = "q-mx-xl">
+                    <q-input label="Username:" />
+                    <q-input label="Password:" />
+                    <q-input label="Role:" />
+                    <q-input label="Department:" />
+                  </div>
+
+                  <div class="row justify-center q-mt-xl " style="height:40px">
+                    <div style="width:20%" class="row">
+                      <q-btn label="Create User" style="width: 100%;" color="negative"/>
                     </div>
                   </div>
                 </div>
+              </div>
 
-              </q-card-section>
-            </q-card>
-          </q-expansion-item>
+            </q-card-section>
+          </q-card>
+        </q-expansion-item>
 
-        </q-card>
-        <q-card flat class="" >
-          <q-scroll-area style="height: 59vh;">
-            <div class="text-subtitle2 text-secondary">
-              <!-- Incomings -->
-                <q-list separator v-for="n in 15" :key="n" >
-                <q-item clickable class="row text-center q-mb-sm bg-white" style="border-radius: 4px">
-                  <div class="row col-9">
-                    <q-item-section  >Username </q-item-section>
-                    <q-item-section>ROLE </q-item-section>
-                    <q-item-section>Department</q-item-section>
-                  </div>
-                  <q-item-section>
-                    <div class="row justify-evenly">
-                      <q-btn label="Edit user" class="bg-negative text-white text-subtitle2" style="width: 40%;"/>
-                      <q-btn label="Delete" class="bg-positive text-white text-subtitle2" style="width: 40%;"/>
-                    </div>
-                  </q-item-section>
-                </q-item>
-              </q-list>
-            </div>
-          </q-scroll-area>
-        </q-card>
-      </div>
+      </q-card>
+      <q-card flat class="bg-primary" >
+        <q-scroll-area style="height: 65vh;">
+          <div class="text-subtitle2 text-secondary">
+            <q-list separator v-for="n in 15" :key="n" class="q-mb-sm">
+              <UserItem />
+            </q-list>
+          </div>
+        </q-scroll-area>
+      </q-card>
+    </div>
 
   </div>
 </template>
 
 <script>
 import { ref } from 'vue'
+import UserItem from './presentational/UserItem.vue';
 
 const stringOptions = [
   'Department A', 'Department B', 'Department C', 'Department D', 'Department E', 'Department F'
@@ -70,6 +59,9 @@ const stringOptions = [
 
 
 export default {
+  components: {
+    UserItem
+  },
   setup () {
     const options = ref(stringOptions)
     return {
@@ -120,104 +112,5 @@ export default {
 
 <style scoped>
 
-p{
-  background: #1C2E3D;
-}
-.highlight{
-
-  background-color: white !important;
-  color: #FE0D0D;
-
-
-}
-  .clear{
-  clear: both;
-}
-
-
-.slide-toggle{
-  display: none;
-}
-
-/* .slidemenu{
-  font-family: arial, sans-serif;
-  max-width: 600px;
-  margin: 50px auto;
-  overflow: hidden;
-} */
-
-.slidemenu label{
-  width: 25%;
-  text-align: center;
-  display: block;
-  float: left;
-  color: #333;
-  opacity: 0.2;
-
-}
-
-.slidemenu label:hover{
-  cursor: pointer;
-  color: #666;
-}
-
-/* .slidemenu label span{
-  display: block;
-  padding: 10px;
-} */
-/*
-.slidemenu label .icon{
-  font-size: 20px;
-  border: solid 2px #333;
-  text-align: center;
-  height: 50px;
-  width: 50px;
-  display: block;
-  margin: 0 auto;
-  line-height: 50px;
-  border-radius: 50%;
-} */
-
-/*Bar Style*/
-
-.slider{
-  width: 100%;
-  height: 5px;
-  display: block;
-  background: #ccc;
-  margin-top: 10px;
-  border-radius: 5px;
-}
-
-.slider .bar{
-  width: 50%;
-  height: 5px;
-  background: #333;
-  border-radius: 5px;
-}
-
-/*Animations*/
-.slidemenu label, .slider .bar {
-  transition: all 500ms ease-in-out;
-  -webkit-transition: all 500ms ease-in-out;
-  -moz-transition: all 500ms ease-in-out;
-}
-
-/*Toggle*/
-
-.slidemenu .slide-toggle:checked + label{
-  opacity: 1;
-}
-
-
-
-.slidemenu #slide-item-1:checked ~ .slider .bar{ margin-left: 0; }
-.slidemenu #slide-item-2:checked ~ .slider .bar{ margin-left: 50%; }
-/* .slidemenu #slide-item-3:checked ~ .slider .bar{ margin-left: 50%; }
-.slidemenu #slide-item-4:checked ~ .slider .bar{ margin-left: 75%; } */
-
-.accordion-label{
-  padding: 12px
-}
 
 </style>

@@ -4,7 +4,7 @@
       <q-toolbar class="flex justify-evenly items-center q-my-auto" style="height:20vh">
 
     <!-- Timer Display  -->
-        <div class="container text-h6 text-primary q-py-sm bg-secondary" style="width:150px; border-radius:4px">
+      <div class="container text-h6 text-primary q-py-sm bg-secondary" style="width:150px; border-radius:4px">
         <div class="row justify-evenly">
           <div class="hours">{{ hours }}</div>
           <div class="divider">:</div>
@@ -44,7 +44,7 @@
       show-if-above
       bordered
       style="overflow-y:hidden"
-      v-if="$router.currentRoute.value.path !== '/admin' && $router.currentRoute.value.path !== '/admin/users' "
+      v-if="!(this.$router.currentRoute.value.path.split('/').includes('admin')) && this.$router.currentRoute.value.path !== '/' "
     >
       <q-list>
         <EssentialLink  />
@@ -57,7 +57,7 @@
       show-if-above
       bordered
       style="overflow-y:hidden"
-      v-if="$router.currentRoute.value.path == '/admin' && $router.currentRoute.value.path == '/admin/users' "
+      v-if="(this.$router.currentRoute.value.path.split('/').includes('admin')) && this.$router.currentRoute.value.path !== '/admin' "
     >
       <q-list>
         <AdminEssentialLink  />
@@ -74,56 +74,11 @@
 import EssentialLink from 'components/EssentialLink.vue'
 import AdminEssentialLink from 'components/admin-pages/AdminEssentialLink.vue'
 
-const linksList = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
-];
 
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   name: 'MainLayout',
-
   components: {
     EssentialLink, AdminEssentialLink
   },
@@ -132,7 +87,7 @@ export default defineComponent({
     const leftDrawerOpen = ref(false)
 
     return {
-      essentialLinks: linksList,
+      adminLogged: this.$router.currentRoute.value.path.split('/').includes('admin'),
       leftDrawerOpen,
       toggleLeftDrawer () {
         leftDrawerOpen.value = !leftDrawerOpen.value
@@ -143,7 +98,8 @@ export default defineComponent({
     }
   },
   mounted() {
-    setInterval(() => this.setTime(), 1000)
+    setInterval(() => this.setTime(), 1000);
+    console.log(this.$router.currentRoute.value.path);
   },
   methods: {
     setTime() {
