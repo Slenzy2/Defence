@@ -14,6 +14,7 @@ const routes = [
       { path: '/message', component: () => import('components/Message.vue') },
       { path: '/admin', component: () => import('components/admin-pages/Login.vue') },
       { path: '/admin/users', component: () => import('components/admin-pages/Users.vue') },
+      { path: '/admin/departments', component: () => import('components/admin-pages/Departments.vue') },
 
     ]
   },

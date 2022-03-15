@@ -4,7 +4,7 @@
       <q-toolbar class="flex justify-evenly items-center q-my-auto" style="height:20vh">
 
     <!-- Timer Display  -->
-        <div class="container text-h6 text-primary q-py-sm bg-secondary" style="width:150px; border-radius:4px">
+      <div class="container text-h6 text-primary q-py-sm bg-secondary" style="width:150px; border-radius:4px">
         <div class="row justify-evenly">
           <div class="hours">{{ hours }}</div>
           <div class="divider">:</div>
@@ -44,9 +44,8 @@
       show-if-above
       bordered
       style="overflow-y:hidden"
-      v-if="!adminLogged"
+      v-if="!adminLogged && this.$router.currentRoute.value.path !== '/' "
     >
-      <!-- v-if="$router.currentRoute.value.path !== '/' && $router.currentRoute.value.path !== '/admin' "  -->
       <q-list>
         <EssentialLink  />
       </q-list>
@@ -58,10 +57,10 @@
       show-if-above
       bordered
       style="overflow-y:hidden"
-      v-if="adminLogged " 
+      v-if="adminLogged" 
     >
       <q-list>
-        <AdminEssentialLink  v-if=" $router.currentRoute.value.path =='/admin/users' " />
+        <AdminEssentialLink  />
       </q-list>
     </q-drawer>
 
@@ -144,7 +143,8 @@ export default defineComponent({
     }
   },
   mounted() {
-    setInterval(() => this.setTime(), 1000)
+    setInterval(() => this.setTime(), 1000);
+    console.log(this.$router.currentRoute.value.path);
   },
   methods: {
     setTime() {
