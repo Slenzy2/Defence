@@ -65,15 +65,13 @@ export default {
   setup () {
     const options = ref(stringOptions)
     return {
+      username: ref(''),
+      password: ref(''),
+      role: ref(''),
+      department: ref(''),
+
       options,
       label: ref('mails'),
-      bar: ref(false),
-      model1: ref(null),
-      selectedFile: ref(null),
-      selected: 1,
-      onClick () {
-        console.log('Clicked on a fab action')
-      },
 
       // Filter Function
       filterFn (val, update) {

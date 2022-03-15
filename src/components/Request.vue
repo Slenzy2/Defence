@@ -101,7 +101,7 @@
                   <div class="bg-white col q-px-md column justify-between q-pb-md" style="height:300px;border-radius:0 0 4px 4px">
                     <!-- <div class="row q-mx-auto" style="width:100%" > -->
                       <!-- <div class="bg-white " style="width: 260px;border-radius:10px"> -->
-                          <q-select  v-model="model1" :options="options" use-input input-debounce="0" @filter="filterFn" label="Select Department To"  >
+                          <q-select  v-model="to" :options="departments" use-input input-debounce="0" @filter="filterFn" label="Select Department To"  >
                             <template v-slot:no-option>
                                 <q-item>
                                   <q-item-section class="text-grey">
@@ -112,33 +112,34 @@
                           </q-select>
                         <!-- </div> -->
                       <!-- </div> -->
-                    <q-input v-model="text" label="Title:" />
-                    <q-input v-model="text" type="textarea" placeholder="Add Comments" />
-                    <q-input  @change="fileSelected" ref="selectImageFile" type = "file" v-show="false" />
-                    <div class="row">
-                      <q-banner v-show="selectedFile" dense class="bg-blue-3 rounded-borders q-mt-md">
-                        <template v-slot:avatar>
-                          <q-icon name="attach_file" color="black" />
-                        </template>
-                        {{selectedFile}}
-                        <!-- <q-space /> -->
-                        <span>
-                          <q-btn round color="red" icon="close" size="0.5rem" class = "q-ml-lg" @click="unSelectFile" />
-                        </span>
-                      </q-banner>
-
-
-                    </div>
-
+                    <q-input v-model="title" label="Title:" />
+                    <q-input v-model="comments" type="textarea" placeholder="Add Comments" />
+                    <q-file  @change="fileSelected" ref="selectImageFile" type = "file"  />
+                    <q-file
+                      v-model="selectedFile"
+                      label="Attach File"
+                      square
+                      flat
+                      use-chips
+                      clearable
+                      accept=".csv,.txt,.xls,.xlsx,.doc,.docx,.pdf,.dbf,.zip,.rar,.7z,.jpg,.png,.gif"
+                      max-files="1"
+                      max-file-size="5120000"
+                    >
+                      <template v-slot:prepend>
+                        <q-icon name="attach_file" />
+                      </template>
+                    </q-file>
 
                     <div class="row justify-between q-mt-xl " style="height:40px">
                       <div style="width:20%" class="row">
-                        <q-btn label="send" style="width: 50%;" color="negative"/>
+                        <q-btn @click="submitRequest" label="send" style="width: 50%;" color="negative"/>
                       </div>
-
+                      <!--
                       <div style="width:13%" class="row justify-evenly">
                         <q-btn round color="secondary" icon="attach_file" @click="selectFile" />
                       </div>
+                      -->
                     </div>
                   </div>
                 </div>
@@ -152,6 +153,7 @@
 
 <script>
 import { ref } from 'vue'
+import { mapGetters } from 'vuex';
 
 const stringOptions = [
   'Department A', 'Department B', 'Department C', 'Department D', 'Department E', 'Department F'
@@ -166,11 +168,17 @@ export default {
       label: ref('mails'),
       bar: ref(false),
       model1: ref(null),
-      selectedFile: ref(null),
       selected: 1,
-      onClick () {
-        console.log('Clicked on a fab action')
-      },
+
+      to: ref(""),
+      title: ref(""),
+      comments: ref(""),
+      selectedFile: ref(null),
+
+      departments: [],
+
+      // ...mapGetters['getDepartments'],
+      // departments: this.$store.getters['defencestore/getDepartments'],
 
       // Filter Function
       filterFn (val, update) {
@@ -202,7 +210,41 @@ export default {
     },
     unSelectFile(){
       this.selectedFile = null;
+    },
+    submitRequest(){
+      let ref = `NA/2022/${Math.floor(Math.random() * 1000)}`;
+      if(this.to !== "" && this.title !== "" && this.comments !== ""){
+        this.$store.dispatch('defencestore/sendRequest', {
+          to: this.to,
+          title: this.title,
+          text: this.comments,
+          files: this.selectedFile,
+          reference: ref
+        })
+        .then(()=>{
+            Notify.create({
+              message: 'Login Success.',
+              caption: 'User successfully authenticated.',
+              color: 'blue'
+            })
+            this.$router.replace('/request')
+        })
+      }else{
+        Notify.create({
+          message: 'Login Failure.',
+          caption: 'Complete filling the form before submitting.',
+          color: 'red'
+        })
+      }
+    },
+    async fetchDepartments(){
+      await this.$store.dispatch('defencestore/getDepartments');
     }
+  },
+  async mounted(){
+    await this.fetchDepartments();
+    this.departments = this.$store.getters['defencestore/getDepartments']
+
   }
 }
 </script>

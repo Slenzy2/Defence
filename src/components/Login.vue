@@ -16,14 +16,14 @@
    <p class="text-center text-h4 text-bold text-secondary">Login</p>
 
    <div class="q-px-xl">
-     <q-input rounded outlined elevated v-model="text" placeholder="Username" class="q-mb-xl q-mt-md q-mx-auto" standout="bg-white" color="white" style="width:60%">
+     <q-input rounded outlined elevated v-model="username" placeholder="Username" class="q-mb-xl q-mt-md q-mx-auto" standout="bg-white" color="white" style="width:60%">
         <template v-slot:append>
           <q-avatar>
             <q-icon name="person" size="1.8rem"/>
           </q-avatar>
         </template>
       </q-input>
-      <q-input rounded outlined v-model="text" placeholder="Password" class="q-mb-xl q-mx-auto" standout="bg-white" color="white" style="width:60%;">
+      <q-input rounded outlined v-model="password" placeholder="Password" class="q-mb-xl q-mx-auto" standout="bg-white" color="white" style="width:60%;">
         <template v-slot:append>
           <q-avatar>
             <q-icon name="lock" size="1.8rem"/>
@@ -33,7 +33,7 @@
    </div>
 
 <!-- Sign in Button  -->
-   <q-btn unelevated rounded color="secondary" label="Login"  class="q-mx-auto q-mb-md"  style="width: 30%;"/>
+   <q-btn @click="userLogin" unelevated rounded color="secondary" label="Login"  class="q-mx-auto q-mb-md"  style="width: 30%;"/>
 
 <!-- Forgotten Password link  -->
    <a href="" class="text-center text-italic text-subtitle1 text-secondary" style="text-decoration: none">Having a problem login in?</a>
@@ -44,8 +44,39 @@
 </template>
 
 <script>
+import { Notify } from 'quasar';
+
+
 export default {
-  name: 'login'
+  name: 'login',
+  data(){
+    return {
+      username: "",
+      password: ""
+    }
+  },
+  methods: {
+    userLogin(){
+      if(this.username !== "" && this.password !== ""){
+        this.$store.dispatch('defencestore/userLogin', {username: this.username, password: this.password})
+        .then(()=>{
+          // if(res.status === 200 || res.status === 201){
+            Notify.create({
+              message: 'Login Success.',
+              caption: 'User successfully authenticated.',
+              color: 'blue'
+            })
+            this.$router.replace('/request')
+        })
+      }else{
+        Notify.create({
+          message: 'Login Failure.',
+          caption: 'Complete filling the form before submitting.',
+          color: 'red'
+        })
+      }
+    }
+  }
 }
 </script>
 
