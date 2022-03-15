@@ -11,11 +11,11 @@
             style=""
           >
             <div class="col-6">
-              <q-tab name="mails"  @click="selected = 1"  :ripple="false"  class="q-mx-auto q-px-none q-py-md" style="width:100%; " > <p  :class="{highlight:selected == 1}" style="border-radius: 15px" class="hello q-px-xl q-py-sm q-my-auto " >Incomings</p> </q-tab>
+              <q-tab name="mails"  @click="selected = 1"  :ripple="false"  class="q-mx-auto q-px-none q-py-md" style="width:100%; " > <p  :class="{highlight:selected == 1}" style="border-radius: 15px" class="hello q-px-xl q-py-sm q-my-auto " >Inbox</p> </q-tab>
             </div>
 
             <div class="col-6">
-              <q-tab name="alarms" @click="selected = 2"  :ripple="false" class="q-mx-auto q-px-none q-py-md " style="width:100%; " > <p  :class="{highlight:selected == 2}" style="border-radius: 15px" class="  q-px-xl q-py-sm q-my-auto " >Outgoings</p> </q-tab>
+              <q-tab name="alarms" @click="selected = 2"  :ripple="false" class="q-mx-auto q-px-none q-py-md " style="width:100%; " > <p  :class="{highlight:selected == 2}" style="border-radius: 15px" class="  q-px-xl q-py-sm q-my-auto " >Sent</p> </q-tab>
             </div>
           </q-tabs>
 
@@ -26,17 +26,17 @@
                 <!-- Incomings -->
                  <q-list separator v-for="n in 2" :key="n" >
                   <q-item clickable class="row text-center q-mb-sm bg-white" style="border-radius: 4px">
-                    <div class="row col-9">
-                      <q-item-section  >Request From DDA</q-item-section>
-                      <q-item-section>Network is not working and the windows </q-item-section>
+                    <!-- <div class=""> -->
+                      <q-item-section  >Message from Lorem Dude</q-item-section>
+                      <q-item-section>Lorem ipsum dolor sit amet consectetur</q-item-section>
                       <q-item-section>Oct /13/2021 : 10:30am.</q-item-section>
-                    </div>
-                    <q-item-section>
+                    <!-- </div> -->
+                    <!-- <q-item-section>
                       <div class="row justify-evenly">
                         <q-btn label="Forward" class="bg-negative text-white text-subtitle2" style="width: 40%;"/>
                         <q-btn label="Comments" class="bg-negative text-white text-subtitle2" style="width: 40%;"/>
                       </div>
-                    </q-item-section>
+                    </q-item-section> -->
                   </q-item>
                 </q-list>
               </div>
@@ -49,18 +49,18 @@
                   <!-- Outgoings -->
                   <q-list separator v-for="n in 3" :key="n" >
                     <q-item clickable class="row text-center q-mb-sm bg-white" style="border-radius: 4px">
-                      <div class="row col-9">
-                        <q-item-section  >Request to DDA</q-item-section>
+                      <!-- <div class="row col-9"> -->
+                        <q-item-section  >Message from Lorem Dude</q-item-section>
                         <q-item-section>Network is not working and the windows </q-item-section>
                         <q-item-section>Oct /13/2021 : 10:30am.</q-item-section>
-                      </div>
+                      <!-- </div> -->
 
-                      <q-item-section>
+                      <!-- <q-item-section>
                         <div class="row justify-evenly" style="width">
                           <span class=" text-negative q-my-auto text-subtitle2" style="width: 40%;"> Pending</span>
                           <q-btn label="Comments" class="bg-negative text-white text-subtitle2" style="width: 40%;"/>
                         </div>
-                      </q-item-section>
+                      </q-item-section> -->
                     </q-item>
                   </q-list>
                 </div>

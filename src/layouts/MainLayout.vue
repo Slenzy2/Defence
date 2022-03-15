@@ -17,7 +17,7 @@
         <q-space/>
 
 <!-- Search Bar  -->
-        <div  style=" width:400px;">
+        <div  style=" width:400px;" v-if="$router.currentRoute.value.path !== '/support' ">
           <q-input rounded standout="bg-accent" v-model="text" placeholder="Search"  dense="dense" >
             <template v-slot:prepend>
               <q-icon name="search" />
