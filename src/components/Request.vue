@@ -26,7 +26,7 @@
                 <!-- Incomings -->
                  <q-list separator v-for="n in 15" :key="n" >
                   <q-item clickable class="row text-center q-mb-sm bg-white" style="border-radius: 4px">
-                    <div class="row col-9">
+                    <div class="row col-9" @click="this.$router.push('/message')" >
                       <q-item-section  >Request From DDA</q-item-section>
                       <q-item-section>Network is not working and the windows </q-item-section>
                       <q-item-section>Oct /13/2021 : 10:30am.</q-item-section>
@@ -49,7 +49,7 @@
                   <!-- Outgoings -->
                   <q-list separator v-for="n in 7" :key="n" >
                     <q-item clickable class="row text-center q-mb-sm bg-white" style="border-radius: 4px">
-                      <div class="row col-9">
+                      <div class="row col-9" @click="this.$router.push('/message')">
                         <q-item-section  >Request to DDA</q-item-section>
                         <q-item-section>Network is not working and the windows </q-item-section>
                         <q-item-section>Oct /13/2021 : 10:30am.</q-item-section>

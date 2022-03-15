@@ -25,18 +25,10 @@
                  <div class="text-subtitle2 text-secondary">
                 <!-- Incomings -->
                  <q-list separator v-for="n in 2" :key="n" >
-                  <q-item clickable class="row text-center q-mb-sm bg-white" style="border-radius: 4px">
-                    <!-- <div class=""> -->
+                  <q-item clickable class="row text-center q-mb-sm bg-white" to="/message" style="border-radius: 4px">
                       <q-item-section  >Message from Lorem Dude</q-item-section>
                       <q-item-section>Lorem ipsum dolor sit amet consectetur</q-item-section>
                       <q-item-section>Oct /13/2021 : 10:30am.</q-item-section>
-                    <!-- </div> -->
-                    <!-- <q-item-section>
-                      <div class="row justify-evenly">
-                        <q-btn label="Forward" class="bg-negative text-white text-subtitle2" style="width: 40%;"/>
-                        <q-btn label="Comments" class="bg-negative text-white text-subtitle2" style="width: 40%;"/>
-                      </div>
-                    </q-item-section> -->
                   </q-item>
                 </q-list>
               </div>
@@ -48,19 +40,10 @@
                 <div class="text-subtitle2 text-secondary">
                   <!-- Outgoings -->
                   <q-list separator v-for="n in 3" :key="n" >
-                    <q-item clickable class="row text-center q-mb-sm bg-white" style="border-radius: 4px">
-                      <!-- <div class="row col-9"> -->
+                    <q-item clickable class="row text-center q-mb-sm bg-white" to="/message" style="border-radius: 4px">
                         <q-item-section  >Message from Lorem Dude</q-item-section>
                         <q-item-section>Network is not working and the windows </q-item-section>
                         <q-item-section>Oct /13/2021 : 10:30am.</q-item-section>
-                      <!-- </div> -->
-
-                      <!-- <q-item-section>
-                        <div class="row justify-evenly" style="width">
-                          <span class=" text-negative q-my-auto text-subtitle2" style="width: 40%;"> Pending</span>
-                          <q-btn label="Comments" class="bg-negative text-white text-subtitle2" style="width: 40%;"/>
-                        </div>
-                      </q-item-section> -->
                     </q-item>
                   </q-list>
                 </div>
