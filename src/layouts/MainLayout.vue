@@ -44,8 +44,9 @@
       show-if-above
       bordered
       style="overflow-y:hidden"
-      v-if="$router.currentRoute.value.path !== '/' && $router.currentRoute.value.path !== '/admin' " 
+      v-if="!adminLogged"
     >
+      <!-- v-if="$router.currentRoute.value.path !== '/' && $router.currentRoute.value.path !== '/admin' "  -->
       <q-list>
         <EssentialLink  />
       </q-list>
@@ -57,10 +58,10 @@
       show-if-above
       bordered
       style="overflow-y:hidden"
-      v-if="$router.currentRoute.value.path !== '/' && $router.currentRoute.value.path !== '/admin' " 
+      v-if="adminLogged " 
     >
       <q-list>
-        <AdminEssentialLink  />
+        <AdminEssentialLink  v-if=" $router.currentRoute.value.path =='/admin/users' " />
       </q-list>
     </q-drawer>
 
@@ -123,7 +124,9 @@ import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   name: 'MainLayout',
-
+  data(){
+    // adminLogged: this.$router.currentRoute.value.path.split('/').includes('admin')
+  },
   components: {
     EssentialLink, AdminEssentialLink
   },
@@ -132,6 +135,7 @@ export default defineComponent({
     const leftDrawerOpen = ref(false)
 
     return {
+      adminLogged: this.$router.currentRoute.value.path.split('/').includes('admin'),
       essentialLinks: linksList,
       leftDrawerOpen,
       toggleLeftDrawer () {
@@ -143,6 +147,7 @@ export default defineComponent({
     }
   },
   mounted() {
+    // console.log(this.$router.currentRoute.value.path.split('/').includes('admin'))
     setInterval(() => this.setTime(), 1000)
   },
   methods: {
