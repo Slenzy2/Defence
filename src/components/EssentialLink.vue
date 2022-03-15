@@ -5,7 +5,7 @@
     <div class=" column itmes-center">
 
       <q-avatar class="bg-primary q-mx-auto" size="5rem">
-        <img src="" alt="">
+        <q-icon name="person" size="3.5rem" color="secondary"/>
       </q-avatar>
 
       <div class="flex  items-center q-mx-auto q-my-md">
@@ -111,7 +111,7 @@
                 active-class="my-menu-link"
                 v-ripple
                 :active="link === 'Logout'"
-                @click="link = 'Logout'" style="width:70%" to="/message">
+                @click="link = 'Logout'" style="width:70%" >
 
                 <q-item-section avatar>
                     <q-icon name="logout" size="2rem" />

@@ -8,16 +8,41 @@
     </div>
 
 <!-- Message Content -->
-    <div class="q-mx-lg">
-      <h6>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </h6>
+    <div class="q-mx-lg q-mt-md">
+
+    <!-- Mail Title  -->
+      <div class="row items-align justify-between ">
+        <!-- <div class="text-h5 text-bold text-capitalize">Lorem title</div> -->
+        <q-space/>
+        <div class="row justify-evenly col-3">
+          <span class="q-my-auto">Date/Month/2022</span>
+          <span class="q-my-auto">00 : 21 : 31</span>
+        </div>
+      </div>
+
+   <!-- Sender's Name  -->
+      <div class="text-subtitle1"><span class="text-bold text-grey" >From:</span> <span class="text-h6">Lorem Dude</span></div>
+
+    <!-- heading -->
+      <div class="q-mx-auto text-center text-h5 text-bold text-uppercase q-px-md q-my-xl" style="width:50%; text-decoration:underline">Lorem Heading and Ipsuim</div>
+
+      <!--Message Body  -->
+      <div class="q-mx-auto text-subtitle1 text-justify q-px-md">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi fugiat nemo quidem nam velit minima quod neque culpa, ad dolorum saepe maiores accusamus harum facilis reprehenderit earum vel. Excepturi, aperiam?
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi fugiat nemo quidem nam velit minima quod neque culpa, ad dolorum saepe maiores accusamus harum facilis reprehenderit earum vel. Excepturi, aperiam?
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi fugiat nemo quidem nam velit minima quod neque culpa, ad dolorum saepe maiores accusamus harum facilis reprehenderit earum vel. Excepturi, aperiam?
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi fugiat nemo quidem nam velit minima quod neque culpa, ad dolorum saepe maiores accusamus harum facilis reprehenderit earum vel. Excepturi, aperiam?
+        <!-- Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi fugiat nemo quidem nam velit minima quod neque culpa, ad dolorum saepe maiores accusamus harum facilis reprehenderit earum vel. Excepturi, aperiam? -->
+      </div>
+
+
     </div>
 
   </div>
 </template>
 
 <script>
+
 export default {
 
 }
