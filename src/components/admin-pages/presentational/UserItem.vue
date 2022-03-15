@@ -8,7 +8,7 @@
         </div>
         <q-item-section>
             <div class="row justify-evenly">
-                <q-btn @click="editDialog = true" label="Edit user" class="bg-negative text-white text-subtitle2" style="width: 40%;height: 30px"/>
+                <q-btn @click="editDialog = true" label="Edit" class="bg-negative text-white text-subtitle2" style="width: 40%;height: 30px"/>
                 <q-btn @click="deleteDialog = true" label="Delete" class="bg-red text-white text-subtitle2" style="width: 40%; height:30px"/>
             </div>
         </q-item-section>
