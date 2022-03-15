@@ -2,7 +2,7 @@
 <div class="bg-primary q-px-xl" style="height:80vh">
   <div class="row justify-between q-py-md" style="width:100%">
     <p class="text-bold text-h5 text-secondary q-my-auto">HISTORY</p>
-    <q-btn color="positive" style="width:100px" label="Delete" no-caps />
+    <!-- <q-btn color="positive" style="width:100px" label="Delete" no-caps /> -->
   </div>
   <q-scroll-area style="height: 70vh;">
     <div class="text-subtitle2 text-secondary" >

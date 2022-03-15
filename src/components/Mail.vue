@@ -1,45 +1,87 @@
 <template>
-  <div class="bg-primary q-pt-xl" style="height:80vh">
-    <div>
+    <div class="q-pa-md bg-primary" style="height:80vh">
+      <div class="q-gutter-y-md" style="width: 100%">
+        <q-card flat class="" >
+          <q-tabs
+            v-model="label"
+            class=" text-secondary bg-primary q-pa-none text-white "
+            align="justify"
+            indicator-color="positive"
+            v-ripple="false"
+            style=""
+          >
+            <div class="col-6">
+              <q-tab name="mails"  @click="selected = 1"  :ripple="false"  class="q-mx-auto q-px-none q-py-md" style="width:100%; " > <p  :class="{highlight:selected == 1}" style="border-radius: 15px" class="hello q-px-xl q-py-sm q-my-auto " >Incomings</p> </q-tab>
+            </div>
 
-    <!-- Department Selectors -->
-       <div class="row q-mx-auto justify-evenly" style="width:90%" >
-        <div class="bg-white " style="width: 260px;border-radius:10px">
-            <q-select  v-model="model1" :options="options" use-input input-debounce="0" @filter="filterFn" label="Select Department To" class="q-px-md q-mx-auto" style="width: 250px" >
-              <template v-slot:no-option>
-                  <q-item>
-                    <q-item-section class="text-grey">
-                      No results
+            <div class="col-6">
+              <q-tab name="alarms" @click="selected = 2"  :ripple="false" class="q-mx-auto q-px-none q-py-md " style="width:100%; " > <p  :class="{highlight:selected == 2}" style="border-radius: 15px" class="  q-px-xl q-py-sm q-my-auto " >Outgoings</p> </q-tab>
+            </div>
+          </q-tabs>
+
+          <q-tab-panels v-model="label" animated class="bg-primary text-white q-pt-lg">
+            <q-tab-panel name="mails">
+               <q-scroll-area style="height: 59vh;">
+                 <div class="text-subtitle2 text-secondary">
+                <!-- Incomings -->
+                 <q-list separator v-for="n in 2" :key="n" >
+                  <q-item clickable class="row text-center q-mb-sm bg-white" style="border-radius: 4px">
+                    <div class="row col-9">
+                      <q-item-section  >Request From DDA</q-item-section>
+                      <q-item-section>Network is not working and the windows </q-item-section>
+                      <q-item-section>Oct /13/2021 : 10:30am.</q-item-section>
+                    </div>
+                    <q-item-section>
+                      <div class="row justify-evenly">
+                        <q-btn label="Forward" class="bg-negative text-white text-subtitle2" style="width: 40%;"/>
+                        <q-btn label="Comments" class="bg-negative text-white text-subtitle2" style="width: 40%;"/>
+                      </div>
                     </q-item-section>
                   </q-item>
-                </template>
-            </q-select>
-          </div>
+                </q-list>
+              </div>
+              </q-scroll-area>
+            </q-tab-panel>
 
-          <div class="bg-white " style="width: 260px;border-radius:10px">
-            <q-select  v-model="model2" :options="options" use-input input-debounce="0" @filter="filterFn" label="Select Department From" class="q-px-md q-mx-auto" style="width: 250px" >
-              <template v-slot:no-option>
-                  <q-item>
-                    <q-item-section class="text-grey">
-                      No results
-                    </q-item-section>
-                  </q-item>
-                </template>
-            </q-select>
-          </div>
-        </div>
+            <q-tab-panel name="alarms">
+              <q-scroll-area style="height: 59vh;">
+                <div class="text-subtitle2 text-secondary">
+                  <!-- Outgoings -->
+                  <q-list separator v-for="n in 3" :key="n" >
+                    <q-item clickable class="row text-center q-mb-sm bg-white" style="border-radius: 4px">
+                      <div class="row col-9">
+                        <q-item-section  >Request to DDA</q-item-section>
+                        <q-item-section>Network is not working and the windows </q-item-section>
+                        <q-item-section>Oct /13/2021 : 10:30am.</q-item-section>
+                      </div>
 
-      <!-- Open Dialog Button -->
-      <div class="row q-mt-xl">
-        <q-space/>
-
-        <q-btn label="Request" style="width:15%; height:50px"  color="secondary" @click="bar = true" class="q-mx-auto" />
-        <!-- <q-btn label="Request" style="width:15%; height:50px" v-show="model1 !== null && model2 !== null "  color="secondary" @click="bar = true" class="q-mx-auto" /> -->
-
-        <q-space/>
+                      <q-item-section>
+                        <div class="row justify-evenly" style="width">
+                          <span class=" text-negative q-my-auto text-subtitle2" style="width: 40%;"> Pending</span>
+                          <q-btn label="Comments" class="bg-negative text-white text-subtitle2" style="width: 40%;"/>
+                        </div>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </div>
+              </q-scroll-area>
+            </q-tab-panel>
+          </q-tab-panels>
+        </q-card>
       </div>
 
-    </div>
+<!-- Add Mail Button  -->
+      <q-page-sticky position="bottom-right" :offset="[18, 18]">
+        <q-btn
+        round
+        size="1.3rem"
+        class="q-mr-md q-mb-lg"
+          icon="add"
+          color="positive"
+          @click="bar = true"
+        />
+
+      </q-page-sticky>
 
     <!-- Draft Dialog -->
        <q-dialog v-model="bar" persistent>
@@ -59,7 +101,7 @@
                   <div class="bg-white col q-px-md column justify-between q-pb-md" style="height:300px;border-radius:0 0 4px 4px">
                     <q-input v-model="text" label="To:" />
                     <q-input v-model="text" label="Title:" />
-                    <q-input v-model="text" type="textarea" placeholder="Add Comments" />
+                    <q-input v-model="text" type="textarea" placeholder="Message" />
                     <q-input  @change="fileSelected" ref="selectImageFile" type = "file" v-show="false" />
 
                     <q-banner v-show="selectedFile" dense class="row flex justify-between bg-blue-3 rounded-borders q-mt-md">
@@ -80,9 +122,6 @@
 
                       <div style="width:13%" class="row justify-evenly">
                         <q-btn round color="secondary" icon="attach_file" @click="selectFile" />
-                        <!-- <q-icon name="attach_file" class="cursor-pointer" size="2rem" v-ripple/> -->
-                        <!-- <q-icon name="image" class="cursor-pointer" size="2rem" v-ripple/> -->
-                        <!-- <q-icon name="delete" class="cursor-pointer" size="2rem" v-ripple/> -->
                       </div>
                     </div>
                   </div>
@@ -92,35 +131,34 @@
           </q-card>
         </q-dialog>
 
+
   </div>
-
-
-
-  <!-- </div> -->
 </template>
 
 <script>
 import { ref } from 'vue'
 
 const stringOptions = [
-  'Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'
+  'Department A', 'Department B', 'Department C', 'Department D', 'Department E', 'Department F'
 ]
 
+
 export default {
-  name: 'Mail',
   setup () {
     const options = ref(stringOptions)
     return {
-      normal: false,
-      text: ref(''),
-      model1: ref(null),
-      model2: ref(null),
-      dialog: ref(false),
-      bar: ref(false),
-      maximizedToggle: ref(true),
-      selectedFile: ref(null),
       options,
-       filterFn (val, update) {
+      label: ref('mails'),
+      bar: ref(false),
+      model1: ref(null),
+      selectedFile: ref(null),
+      selected: 1,
+      onClick () {
+        console.log('Clicked on a fab action')
+      },
+
+      // Filter Function
+      filterFn (val, update) {
         if (val === '') {
           update(() => {
             options.value = stringOptions
@@ -136,10 +174,9 @@ export default {
           options.value = stringOptions.filter(v => v.toLowerCase().indexOf(needle) > -1)
         })
       }
-
     }
   },
-  methods: {
+ methods: {
     selectFile(){
       this.$refs.selectImageFile.$el.click();
     },
@@ -157,4 +194,14 @@ export default {
 
 <style scoped>
 
+p{
+  background: #1C2E3D;
+}
+.highlight{
+
+  background-color: white !important;
+  color: #FE0D0D;
+
+
+}
 </style>

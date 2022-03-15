@@ -10,7 +10,8 @@ const routes = [
       { path: '/support', component: () => import('components/Support.vue') },
       { path: '/logs', component: () => import('components/Logs.vue') },
       { path: '/sample', component: () => import('components/Sample.vue') },
-      { path: '/login', component: () => import('components/Login.vue') }
+      { path: '/login', component: () => import('components/Login.vue') },
+      { path: '/message', component: () => import('components/Message.vue') }
     ]
   },
 

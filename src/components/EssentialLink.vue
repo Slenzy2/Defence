@@ -94,7 +94,7 @@
                 active-class="my-menu-link"
                 v-ripple
                 :active="link === 'Logout'"
-                @click="link = 'Logout'" style="width:70%" to="/sample">
+                @click="link = 'Logout'" style="width:70%" to="/message">
 
                 <q-item-section avatar>
                     <q-icon name="logout" size="2rem" />

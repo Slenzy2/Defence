@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf" >
-    <q-header v-if="$router.currentRoute.value.path !== '/login' " >
+    <q-header v-if="$router.currentRoute.value.path !== '/login' " class="q-pr-xl" >
       <q-toolbar class="flex justify-evenly items-center q-my-auto" style="height:20vh">
 
     <!-- Timer Display  -->
