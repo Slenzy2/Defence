@@ -11,45 +11,46 @@
             style=""
           >
             <div class="col-6">
-              <q-tab name="mails"  @click="selected = 1"  :ripple="false"  class="q-mx-auto q-px-none q-py-md" style="width:100%; " > <p  :class="{highlight:selected == 1}" style="border-radius: 15px" class="hello q-px-xl q-py-sm q-my-auto " >Incomings</p> </q-tab>
+              <q-tab name="incomings"  @click="selected = 1"  :ripple="false"  class="q-mx-auto q-px-none q-py-md" style="width:100%; " > <p  :class="{highlight:selected == 1}" style="border-radius: 15px" class="hello q-px-xl q-py-sm q-my-auto " >Incomings</p> </q-tab>
             </div>
 
             <div class="col-6">
-              <q-tab name="alarms" @click="selected = 2"  :ripple="false" class="q-mx-auto q-px-none q-py-md " style="width:100%; " > <p  :class="{highlight:selected == 2}" style="border-radius: 15px" class="  q-px-xl q-py-sm q-my-auto " >Outgoings</p> </q-tab>
+              <q-tab name="outgoings" @click="selected = 2"  :ripple="false" class="q-mx-auto q-px-none q-py-md " style="width:100%; " > <p  :class="{highlight:selected == 2}" style="border-radius: 15px" class="  q-px-xl q-py-sm q-my-auto " >Outgoings</p> </q-tab>
             </div>
           </q-tabs>
 
           <q-tab-panels v-model="label" animated class="bg-primary text-white q-pt-lg">
-            <q-tab-panel name="mails">
+            <q-tab-panel name="incomings">
                <q-scroll-area style="height: 59vh;">
                  <div class="text-subtitle2 text-secondary">
                 <!-- Incomings -->
-                 <q-list separator v-for="n in 15" :key="n" >
-                  <q-item clickable class="row text-center q-mb-sm bg-white" style="border-radius: 4px">
-                    <div class="row col-9" @click="this.$router.push('/message')" >
-                      <q-item-section  >Request From DDA</q-item-section>
-                      <q-item-section>Network is not working and the windows </q-item-section>
-                      <q-item-section>Oct /13/2021 : 10:30am.</q-item-section>
-                    </div>
-                    <q-item-section>
-                      <div class="row justify-evenly">
-                        <q-btn label="Forward" class="bg-negative text-white text-subtitle2" style="width: 40%;"/>
-                        <q-btn label="Comments" class="bg-negative text-white text-subtitle2" style="width: 40%;"/>
+                  <q-list separator v-for="incomingRequest in incomingRequests" :key="incomingRequest._id" >
+                    <q-item clickable class="row text-center q-mb-sm bg-white" style="border-radius: 4px">
+                      <div class="row col-9" @click="this.$router.push(`/message/${incomingRequest._id}`)">
+                        <q-item-section  >Request to DDA</q-item-section>
+                        <q-item-section>Network is not working and the windows </q-item-section>
+                        <q-item-section>Oct /13/2021 : 10:30am.</q-item-section>
                       </div>
-                    </q-item-section>
-                  </q-item>
-                </q-list>
+
+                      <q-item-section>
+                        <div class="row justify-evenly" style="width">
+                          <span class=" text-negative q-my-auto text-subtitle2" style="width: 40%;"> Pending</span>
+                          <q-btn label="Comments" class="bg-negative text-white text-subtitle2" style="width: 40%;"/>
+                        </div>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
               </div>
               </q-scroll-area>
             </q-tab-panel>
 
-            <q-tab-panel name="alarms">
+            <q-tab-panel name="outgoings">
               <q-scroll-area style="height: 59vh;">
                 <div class="text-subtitle2 text-secondary">
                   <!-- Outgoings -->
-                  <q-list separator v-for="n in 7" :key="n" >
+                  <q-list separator v-for="outgoingRequest in outgoingRequests" :key="outgoingRequest._id" >
                     <q-item clickable class="row text-center q-mb-sm bg-white" style="border-radius: 4px">
-                      <div class="row col-9" @click="this.$router.push('/message')">
+                      <div class="row col-9" @click="this.$router.push(`/message/${outgoingRequest._id}`)">
                         <q-item-section  >Request to DDA</q-item-section>
                         <q-item-section>Network is not working and the windows </q-item-section>
                         <q-item-section>Oct /13/2021 : 10:30am.</q-item-section>
@@ -101,7 +102,7 @@
                   <div class="bg-white col q-px-md column justify-between q-pb-md" style="height:300px;border-radius:0 0 4px 4px">
                     <!-- <div class="row q-mx-auto" style="width:100%" > -->
                       <!-- <div class="bg-white " style="width: 260px;border-radius:10px"> -->
-                          <q-select  v-model="to" :options="departments" use-input input-debounce="0" @filter="filterFn" label="Select Department To"  >
+                          <q-select  v-model="to" :options="departments" use-input input-debounce="0" label="Select Department To"  >
                             <template v-slot:no-option>
                                 <q-item>
                                   <q-item-section class="text-grey">
@@ -114,7 +115,7 @@
                       <!-- </div> -->
                     <q-input v-model="title" label="Title:" />
                     <q-input v-model="comments" type="textarea" placeholder="Add Comments" />
-                    <q-file  @change="fileSelected" ref="selectImageFile" type = "file"  />
+                    <!-- <q-file  @change="fileSelected" ref="selectImageFile" type = "file"  /> -->
                     <q-file
                       v-model="selectedFile"
                       label="Attach File"
@@ -153,19 +154,11 @@
 
 <script>
 import { ref } from 'vue'
-import { mapGetters } from 'vuex';
-
-const stringOptions = [
-  'Department A', 'Department B', 'Department C', 'Department D', 'Department E', 'Department F'
-]
-
 
 export default {
   setup () {
-    const options = ref(stringOptions)
     return {
-      options,
-      label: ref('mails'),
+      label: ref('incomings'),
       bar: ref(false),
       model1: ref(null),
       selected: 1,
@@ -176,27 +169,9 @@ export default {
       selectedFile: ref(null),
 
       departments: [],
+      incomingRequests: [],
+      outgoingRequests: [],
 
-      // ...mapGetters['getDepartments'],
-      // departments: this.$store.getters['defencestore/getDepartments'],
-
-      // Filter Function
-      filterFn (val, update) {
-        if (val === '') {
-          update(() => {
-            options.value = stringOptions
-
-            // here you have access to "ref" which
-            // is the Vue reference of the QSelect
-          })
-          return
-        }
-
-        update(() => {
-          const needle = val.toLowerCase()
-          options.value = stringOptions.filter(v => v.toLowerCase().indexOf(needle) > -1)
-        })
-      }
     }
   },
  methods: {
@@ -212,7 +187,7 @@ export default {
       this.selectedFile = null;
     },
     submitRequest(){
-      let ref = `NA/2022/${Math.floor(Math.random() * 1000)}`;
+      let ref = `NA/2022/${Math.floor(Math.random() * 1000)}/${Math.floor(Math.random() * 4000.93)}`;
       if(this.to !== "" && this.title !== "" && this.comments !== ""){
         this.$store.dispatch('defencestore/sendRequest', {
           to: this.to,
@@ -223,28 +198,38 @@ export default {
         })
         .then(()=>{
             Notify.create({
-              message: 'Login Success.',
-              caption: 'User successfully authenticated.',
+              message: 'Request successfully sent.',
               color: 'blue'
             })
             this.$router.replace('/request')
         })
       }else{
         Notify.create({
-          message: 'Login Failure.',
-          caption: 'Complete filling the form before submitting.',
+          message: 'You can\'t leave the "to", "title" and "Comments" fields empty.',
           color: 'red'
         })
       }
     },
-    async fetchDepartments(){
-      await this.$store.dispatch('defencestore/getDepartments');
+    fetchDepartments(){
+      this.$store.dispatch('defencestore/getDepartments')
+      .then(() => {
+        this.departments = this.$store.getters['defencestore/getDepartments']
+      });
+    },
+    fetchRequests(){
+      this.$store.dispatch('defencestore/getRequests')
+      .then(()=>{
+        let req = this.$store.getters['defencestore/getRequests'];
+        this.incomingRequests = req.incoming;
+        this.outgoingRequests = req.outgoing;
+      })
     }
   },
   async mounted(){
-    await this.fetchDepartments();
-    this.departments = this.$store.getters['defencestore/getDepartments']
-
+    this.fetchDepartments();
+    // this.departments = await this.$store.getters['defencestore/getDepartments']
+    this.fetchRequests();
+    // this.departments = this.$store.getters['defencestore/getRequests']
   }
 }
 </script>

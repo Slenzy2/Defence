@@ -60,7 +60,6 @@ export default {
       if(this.username !== "" && this.password !== ""){
         this.$store.dispatch('defencestore/userLogin', {username: this.username, password: this.password})
         .then(()=>{
-          // if(res.status === 200 || res.status === 201){
             Notify.create({
               message: 'Login Success.',
               caption: 'User successfully authenticated.',

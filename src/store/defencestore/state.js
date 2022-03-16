@@ -1,7 +1,10 @@
 export default function () {
   return {
-    token: null,
+    adminToken: null,
+    userToken: null,
     departments: [],
+    outgoingRequests: [],
+    incomingRequests: []
 
   }
 }
