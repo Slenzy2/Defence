@@ -1,7 +1,7 @@
 <template>
     <div class="q-pa-md bg-primary" style="height:80vh">
 
-      <Watermark />
+      <!-- <Watermark /> -->
 
       <div class="q-gutter-y-md" style="width: 100%">
         <q-card flat class="" >
@@ -39,7 +39,7 @@
             </q-tab-panel>
 
             <q-tab-panel name="outbox">
-              <q-scroll-area style="height: 59vh;">
+              <q-scroll-area style="height: 59vh">
                 <div class="text-subtitle2 text-secondary">
                   <!-- Outgoings -->
                   <q-list separator v-for="n in 3" :key="n" >
@@ -61,7 +61,7 @@
         <q-btn
         round
         size="1.3rem"
-        class="q-mr-md q-mb-lg"
+        class="q-mr-md q-mb-lg cursor-pointer"
           icon="add"
           color="positive"
           @click="bar = true"

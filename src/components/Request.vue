@@ -2,7 +2,7 @@
     <div class="q-pa-md bg-primary" style="height:80vh">
 
       <!-- Water Marked Image  -->
-        <Watermark />
+        <!-- <Watermark /> -->
 
 
       <div class="q-gutter-y-md" style="width: 100%">
@@ -25,7 +25,7 @@
           </q-tabs>
 
           <q-tab-panels v-model="label" animated class="bg-primary text-white q-pt-lg">
-            <q-tab-panel name="incomings">
+            <q-tab-panel name="incomings" >
                <q-scroll-area style="height: 59vh;">
                  <div class="text-subtitle2 text-secondary">
                 <!-- Incomings -->
@@ -40,7 +40,7 @@
                       <q-item-section>
                         <div class="row justify-evenly" style="width">
                           <span class=" text-negative q-my-auto text-subtitle2" style="width: 40%;"> Pending</span>
-                          <q-btn label="Comments" class="bg-negative text-white text-subtitle2" style="width: 40%;"/>
+                          <!-- <q-btn label="Comments" class="bg-negative text-white text-subtitle2" style="width: 40%;"/> -->
                         </div>
                       </q-item-section>
                     </q-item>
@@ -49,13 +49,13 @@
               </q-scroll-area>
             </q-tab-panel>
 
-            <q-tab-panel name="outgoings">
+            <q-tab-panel name="outgoings" style="z-index: 5">
               <q-scroll-area style="height: 59vh;">
                 <div class="text-subtitle2 text-secondary">
                   <!-- Outgoings -->
                   <q-list separator v-for="outgoingRequest in outgoingRequests" :key="outgoingRequest._id" >
                     <q-item clickable class="row text-center q-mb-sm bg-white" style="border-radius: 4px">
-                      <div class="row col-9" @click="this.$router.push(`/message/${outgoingRequest._id}`)">
+                      <div class="row col-9 cursor-pointer"  @click="this.$router.push(`/message/${outgoingRequest._id}`)">
                         <q-item-section  >Request to DDA</q-item-section>
                         <q-item-section>Network is not working and the windows </q-item-section>
                         <q-item-section>Oct /13/2021 : 10:30am.</q-item-section>
@@ -64,7 +64,7 @@
                       <q-item-section>
                         <div class="row justify-evenly" style="width">
                           <span class=" text-negative q-my-auto text-subtitle2" style="width: 40%;"> Pending</span>
-                          <q-btn label="Comments" class="bg-negative text-white text-subtitle2" style="width: 40%;"/>
+                          <!-- <q-btn label="Comments" class="bg-negative text-white text-subtitle2" style="width: 40%;"/> -->
                         </div>
                       </q-item-section>
                     </q-item>
@@ -159,11 +159,11 @@
 
 <script>
 import { ref } from 'vue'
-import Watermark from 'components/Watermark.vue'
+// import Watermark from 'components/Watermark.vue'
 
 export default {
   components:{
-    Watermark
+    // Watermark
   },
   setup () {
     return {

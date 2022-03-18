@@ -1,7 +1,7 @@
 <template>
 <div class="bg-primary q-px-xl" style="height:80vh">
 
-      <Watermark />
+      <!-- <Watermark /> -->
 
 
   <div class="row justify-between q-py-md" style="width:100%">

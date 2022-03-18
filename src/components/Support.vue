@@ -1,7 +1,7 @@
 <template>
   <div style="height:80vh" class="bg-primary q-pt-lg">
 
-      <Watermark />
+      <!-- <Watermark /> -->
 
     <p class="text-italic text-center q-px-md text-bold text-secondary text-h4 q-mx-auto">Having a Problem?</p>
 

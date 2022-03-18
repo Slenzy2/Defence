@@ -48,7 +48,7 @@
                                 <q-icon name="attach_file" />
                               </template>
                             </q-file>
-                          
+
                             <q-input v-model="name" label="Edit Name:" />
                             <q-input v-model="rank" label="Edit Rank:" />
                             <q-expansion-item
@@ -73,7 +73,7 @@
 
             <q-card-actions align="right">
             <q-btn flat label="Cancel" color="red"  v-close-popup />
-            <q-btn label="Save" color="negative" />
+            <q-btn label="Save" color="negative"  />
             </q-card-actions>
         </q-card>
       </q-dialog>
@@ -153,12 +153,12 @@
                         <q-item-label class="text-left text-subtitle1">Support</q-item-label>
                     </q-item-section>
                 </q-item>
-                <q-item 
+                <q-item
                   clickable class="q-mb-md q-px-xl"
                   active-class="bg-primary text-secondary"
                   v-ripple
-                  @click="logout" 
-                  style="border-radius: 25px" 
+                  @click="logout"
+                  style="border-radius: 25px"
                 >
 
                   <q-item-section avatar>

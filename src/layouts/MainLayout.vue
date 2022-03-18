@@ -65,7 +65,8 @@
     </q-drawer>
 
     <q-page-container>
-      <router-view />
+        <Watermark class="q-mx-auto" />
+      <router-view >  </router-view>
     </q-page-container>
   </q-layout>
 </template>
@@ -73,6 +74,7 @@
 <script>
 import EssentialLink from 'components/EssentialLink.vue'
 import AdminEssentialLink from 'components/admin-pages/AdminEssentialLink.vue'
+import Watermark from 'components/Watermark.vue'
 
 
 import { defineComponent, ref } from 'vue'
@@ -80,7 +82,7 @@ import { defineComponent, ref } from 'vue'
 export default defineComponent({
   name: 'MainLayout',
   components: {
-    EssentialLink, AdminEssentialLink
+    EssentialLink, AdminEssentialLink, Watermark
   },
 
   data () {
