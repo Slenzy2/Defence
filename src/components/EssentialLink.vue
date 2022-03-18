@@ -2,21 +2,40 @@
   <q-page class="bg-secondary text-white q-pt-md" style="height:100vh">
 
 <!-- Profile part  -->
-    <div class=" column itmes-center">
+    <div class=" column items-center">
 
-      <q-avatar class="bg-primary q-mx-auto" size="5rem">
+      <!-- <q-avatar class="bg-primary q-mx-auto" size="5rem">
         <q-icon name="person" size="3.5rem" color="secondary"/>
-      </q-avatar>
+      </q-avatar> -->
+       <!-- Profile Image  -->
+      <div class=" row">
+        <q-space/>
+        <q-img
+          src="https://cdn.quasar.dev/img/parallax2.jpg"
+          spinner-color="white"
+          style="height: 110px; width: 110px; border-radius:100%;"
+          img-class="my-custom-image"
+          class="rounded-borders "
+          @mouseenter="edit = true"
+          @mouseleave="edit =false"
+
+        >
+          <div class="absolute-bottom" v-show="edit" style="padding: 0; height: 30px" >
+            <q-btn no-caps icon="add"  unelevated label="Edit" style="width:100%;" size="0.7rem"/>
+          </div>
+        </q-img>
+        <q-space/>
+      </div>
 
       <div class="flex  items-center q-mx-auto q-my-md">
-        <p class="q-my-auto q-mr-md text-weight-thin">DDC REGISTRY</p>
+        <p class="q-my-auto q-mr-md text-weight-medium">User Name</p>
         <q-icon name="notifications" size="1.3rem"/>
       </div>
 
     </div>
 
 <!-- Dashboard Text  -->
-    <div class="flex items-center q-mt-xl q-mx-auto flex flex-center">
+    <div class="flex items-center q-mt-md q-mx-auto flex flex-center">
         <q-icon name="dashboard" size="1.5rem" class="q-mr-md"/>
         <p class="q-my-auto text-h6">DASHBOARD</p>
     </div>
@@ -131,6 +150,11 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'EssentialLink',
+  data(){
+    return{
+      edit: false
+    }
+  }
 
 })
 </script>
