@@ -34,7 +34,7 @@
    </div>
 
 <!-- Sign in Button  -->
-   <q-btn @click="userLogin" unelevated rounded color="secondary" label="Login"  class="q-mx-auto q-mb-md"  style="width: 30%;"/>
+   <q-btn @click="userLogin" unelevated rounded color="secondary" v-on:keyup.enter="userLogin" label="Login"  class="q-mx-auto q-mb-md"  style="width: 30%;"/>
 
 <!-- Forgotten Password link  -->
 <!-- <div class="row justify-center"> -->

@@ -1,5 +1,8 @@
 <template>
     <div class="q-pa-md bg-primary" style="height:80vh">
+
+      <Watermark />
+
       <div class="q-gutter-y-md" style="width: 100%">
         <q-card flat class="" >
           <q-tabs
@@ -119,10 +122,13 @@
 
 <script>
 import { ref } from 'vue'
-
+import Watermark from 'components/Watermark.vue'
 
 
 export default {
+   components:{
+    Watermark
+  },
   setup () {
     return {
       label: ref('inbox'),

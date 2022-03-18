@@ -1,5 +1,10 @@
 <template>
     <div class="q-pa-md bg-primary" style="height:80vh">
+
+      <!-- Water Marked Image  -->
+        <Watermark />
+
+
       <div class="q-gutter-y-md" style="width: 100%">
         <q-card flat class="" >
           <q-tabs
@@ -154,8 +159,12 @@
 
 <script>
 import { ref } from 'vue'
+import Watermark from 'components/Watermark.vue'
 
 export default {
+  components:{
+    Watermark
+  },
   setup () {
     return {
       label: ref('incomings'),
@@ -235,6 +244,7 @@ export default {
 </script>
 
 <style scoped>
+
 
 p{
   background: #1C2E3D;
