@@ -1,13 +1,17 @@
 <template>
   <div style="height:80vh" class="bg-primary q-pt-lg">
+
+      <Watermark />
+
     <p class="text-italic text-center q-px-md text-bold text-secondary text-h4 q-mx-auto">Having a Problem?</p>
 
-     <div class="q-pa-md q-mx-auto" style="max-width: 60%">
+     <div class="q-pa-md q-mx-auto bg-white " style="max-width: 70%; z-index:1; border: 1px solid #1C2E3D; border-radius: 5px">
 
       <q-form
         @submit="onSubmit"
         @reset="onReset"
-        class="q-gutter-lg"
+        class="q-gutter-lg q-py-lg"
+
       >
 
         <q-input filled  v-model="name"  label="Your Name *"  :rules="[ val => val && val.length > 0 || 'Please type something']" class="bg-white q-pa-none" />
@@ -32,7 +36,7 @@
         />
 
         <div>
-          <q-btn label="Get Help" type="submit" style="width:20%" color="negative"/>
+          <q-btn label="Submit" type="submit" style="width:20%" color="negative"/>
           <q-btn label="Cancel" type="reset"   color="positive" style="width:20%" class="q-ml-sm" flat/>
         </div>
       </q-form>
@@ -44,9 +48,13 @@
 <script>
 import { useQuasar } from 'quasar'
 import { ref } from 'vue'
+import Watermark from 'components/Watermark.vue'
 
 export default {
   name: 'Support',
+   components:{
+    Watermark
+  },
   setup () {
     const $q = useQuasar()
 
