@@ -1,3 +1,4 @@
+
 import { Notify } from 'quasar';
 import axios from 'axios';
 import { useRoute } from 'vue-router';
@@ -224,14 +225,14 @@ export function getRequests (context, data) {
           })
       })
     })
-  
+
 }
 
 export function sendMail (context, data) {
     // const { to, text, reference, title } = data;
     console.log(data);
     const { to, text, files, title } = data;
-  
+
     return new Promise((resolve, reject) => {
       axios({
         method: "POST",
@@ -270,5 +271,5 @@ export function sendMail (context, data) {
           })
       })
     })
-  
+
 }

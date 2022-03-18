@@ -11,11 +11,11 @@
             style=""
           >
             <div class="col-6">
-              <q-tab name="incomings"  @click="selected = 1"  :ripple="false"  class="q-mx-auto q-px-none q-py-md" style="width:100%; " > <p  :class="{highlight:selected == 1}" style="border-radius: 15px" class="hello q-px-xl q-py-sm q-my-auto " >Incomings</p> </q-tab>
+              <q-tab name="incomings"  @click="selected = 1"  :ripple="false"  class="q-mx-auto q-px-none q-py-md" style="width:100%; " > <p  :class="{highlight:selected == 1}" style="border-radius: 15px" class="hello q-px-xl q-py-sm q-my-auto " >Incoming Request</p> </q-tab>
             </div>
 
             <div class="col-6">
-              <q-tab name="outgoings" @click="selected = 2"  :ripple="false" class="q-mx-auto q-px-none q-py-md " style="width:100%; " > <p  :class="{highlight:selected == 2}" style="border-radius: 15px" class="  q-px-xl q-py-sm q-my-auto " >Outgoings</p> </q-tab>
+              <q-tab name="outgoings" @click="selected = 2"  :ripple="false" class="q-mx-auto q-px-none q-py-md " style="width:100%; " > <p  :class="{highlight:selected == 2}" style="border-radius: 15px" class="  q-px-xl q-py-sm q-my-auto " >Outgoing Request</p> </q-tab>
             </div>
           </q-tabs>
 
