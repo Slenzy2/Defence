@@ -20,3 +20,8 @@ export function setRequests (state, payload) {
   state.outgoingRequests = payload.outgoing;
   state.incomingRequests = payload.incoming;
 }
+
+export function logout(state){
+  console.log("Logout commited")
+  state.userToken = null
+}

@@ -153,11 +153,13 @@
                         <q-item-label class="text-left text-subtitle1">Support</q-item-label>
                     </q-item-section>
                 </q-item>
-                <q-item clickable class=""
-                  active-class="my-menu-link"
+                <q-item 
+                  clickable class="q-mb-md q-px-xl"
+                  active-class="bg-primary text-secondary"
                   v-ripple
-                  
-                  @click="logout" style="width:70%" >
+                  @click="logout" 
+                  style="border-radius: 25px" 
+                >
 
                   <q-item-section avatar>
                       <q-icon name="logout" size="2rem" />
@@ -167,28 +169,7 @@
                   </q-item-section>
                 </q-item>
             </q-list>
-
     </div>
-
-
-     <!-- <div class="q-py-none row  q-mt-xl" >
-              <q-space/>
-              <q-item clickable class=""
-                active-class="my-menu-link"
-                v-ripple
-                :active="link === 'Logout'"
-                @click="link = 'Logout'" style="width:70%" >
-
-                <q-item-section avatar>
-                    <q-icon name="logout" size="2rem" />
-                </q-item-section>
-                <q-item-section>
-                    <q-item-label class="text-h6 text-center">Logout</q-item-label>
-                </q-item-section>
-                </q-item>
-                <q-space/>
-            </div> -->
-
   </q-page>
 </template>
 
@@ -209,12 +190,14 @@ export default defineComponent({
 
     }
   },
-  method: {
+  methods: {
     logout(){
+      // console.log("LOGOUT")
       localStorage.removeItem("adminToken");
       localStorage.removeItem("userDept");
       localStorage.removeItem("userToken");
-  
+
+      this.$store.commit('logout')
       this.$router.replace('/');
     }
   }

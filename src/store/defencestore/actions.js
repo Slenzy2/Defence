@@ -202,7 +202,7 @@ export function getRequests (context, data) {
             let userDept = localStorage.getItem('userDept');
             let requests = response.data.doc;
             requests.forEach(item => {
-                if(item.from === userDept){
+                if(item._id === userDept){
                     outgoing.push(item);
                 }else{
                     incoming.push(item);
