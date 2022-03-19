@@ -226,8 +226,6 @@ export default {
         })
         .then(response => {
             if(response.status === 201){
-                
-                console.log(response.data.doc);
                 response = response.data.doc;
                 this.from = response.from.name;
                 this.to = response.to.name;
