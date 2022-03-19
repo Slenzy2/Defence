@@ -207,7 +207,6 @@ export default {
         })
         .then(()=>{
           window.location.reload();
-            // this.$router.replace('/request')
         })
       }else{
         Notify.create({

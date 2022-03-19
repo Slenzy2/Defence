@@ -10,8 +10,8 @@
   </div>
   <q-scroll-area style="height: 70vh;">
     <div class="text-subtitle2 text-secondary" >
-        <q-list separator v-for="n in 10" :key="n" >
-          <Log />
+        <q-list separator v-for="log in logs" :key="log._id" >
+          <Log :log="log" />
       </q-list>
     </div>
   </q-scroll-area>
@@ -28,8 +28,24 @@ export default {
   components:{
     Log,
     Watermark
+  },
+  data(){
+    return{
+      logs: []
+    }
+  },
+  methods: {
+    fetchRequests(){
+      this.$store.dispatch('defencestore/getLogs')
+      .then(()=>{
+        let req = this.$store.getters['defencestore/getLogs'];
+        this.logs = req;
+      })
+    }
+  },
+  mounted(){
+    this.fetchRequests();
   }
-
 }
 </script>
 

@@ -5,7 +5,10 @@ export default function () {
     departments: [],
     outgoingRequests: [],
     incomingRequests: [],
-    logs: []
+    inbox: [],
+    sent: [],
+    logs: [],
+    usersInDept: []
 
   }
 }

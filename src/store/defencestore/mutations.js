@@ -22,7 +22,22 @@ export function setRequests (state, payload) {
   state.incomingRequests = payload.incoming;
 }
 
-export function getLogs (state, payload) {
+export function setMails (state, payload) {
+  state.inbox = payload.inbox;
+  state.sent = payload.sent;
+}
+
+export function getUsersInDepartment (state, payload) {
+  let arr = [];
+  let username = localStorage.getItem("username");
+  payload.users.forEach(item => {
+    username !== item.username && arr.push(item.username)
+  })
+  console.log(arr)
+  state.usersInDept = arr;
+}
+
+export function setLogs (state, payload) {
   state.logs = payload;
 }
 

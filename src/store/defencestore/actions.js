@@ -64,7 +64,9 @@ export function userLogin (context, data) {
               let token = response.data.token;
               localStorage.setItem('userToken', token);
               let department = response.data.doc.department;
+              let username = response.data.doc.username;
               localStorage.setItem('userDept', department);
+              localStorage.setItem('username', username);
               context.commit('saveUserToken', {token})
               Notify.create({
                   message: 'Login Success.',
@@ -231,36 +233,106 @@ export function sendMail (context, data) {
       axios({
         method: "POST",
         url: baseurl + '/user/mail',
-        // data: { to, text, title }
         data: { to, text, files, title },
         headers: {
           'Authorization': 'Bearer '+localStorage.getItem('userToken')
         }
       })
       .then(response => {
-        console.log(response);
-        /*if(response.status === 201){
-            let token = response.data.token;
-            localStorage.setItem('userToken', token);
-            context.commit('saveToken', {token})
-            Notify.create({
-                message: 'Login Success.',
-                caption: 'User successfully authenticated.',
-                color: 'blue'
-            })
-            resolve();
+        // console.log(response);
+        if(response.status === 201){
+          Notify.create({
+              message: "Mail successfully sent.",
+              color: 'blue'
+          })
+          resolve();
         }else{
             Notify.create({
-                message: "Login Failure.",
-                caption: "Authentication error, check credentials.",
+                message: "Error sending mail. Please retry.",
                 color: 'red'
             })
             reject();
-        }*/
+        }
       })
       .catch(err => {
           Notify.create({
-              message: 'Error sending mail.',
+              message: 'Error sending mail. Please retry.',
+              color: 'red'
+          })
+          reject();
+      })
+    })
+
+}
+
+export function getUsersInDepartment (context, data) {
+  return new Promise((resolve, reject) => {
+    axios({
+      method: "GET",
+      url: baseurl + '/user/users',
+      headers: {
+        'Authorization': 'Bearer '+localStorage.getItem('userToken')
+      }
+    })
+    .then(response => {
+        // console.log(response);
+      if(response.status === 201 || response.status === 200){
+          context.commit('getUsersInDepartment', {users: response.data.doc})
+          resolve();
+      }else{
+          Notify.create({
+              message: "Error fetching users in your department.",
+              color: 'red'
+          })
+          reject();
+      }
+    })
+    .catch(err => {
+        Notify.create({
+            message: 'Error fetching users in your department.',
+            color: 'red'
+        })
+    })
+  })
+
+}
+
+export function getMails (context, data) {
+    return new Promise((resolve, reject) => {
+      axios({
+        method: "GET",
+        url: baseurl + '/user/mail',
+        headers: {
+          'Authorization': 'Bearer '+localStorage.getItem('userToken')
+        }
+      })
+      .then(response => {
+        console.log(response.data.doc);
+        if(response.status === 201 || response.status === 200){
+          let sent = [];
+          let inbox = [];
+          let username = localStorage.getItem('username');
+          let requests = response.data.doc;
+          requests.forEach(item => {
+              if(item.from.username === username){
+                  sent.push(item);
+              }else{
+                  inbox.push(item);
+              }
+          });
+          context.commit('setMails', {sent, inbox});
+          resolve();
+        }else{
+            Notify.create({
+                message: "Error fetching users in your department.",
+                color: 'red'
+            })
+            reject();
+        }
+      })
+      .catch(err => {
+          Notify.create({
+              message: 'Error fetching requests.',
               color: 'red'
           })
       })
@@ -278,28 +350,17 @@ export function getLogs (context, data) {
         }
       })
       .then(response => {
-        console.log(response.data);
-        // if(response.status === 201 || response.status === 200){
-        //     let outgoing = [];
-        //     let incoming = [];
-        //     let userDept = localStorage.getItem('userDept');
-        //     let requests = response.data.doc;
-        //     requests.forEach(item => {
-        //         if(item._id === userDept){
-        //             outgoing.push(item);
-        //         }else{
-        //             incoming.push(item);
-        //         }
-        //     });
-        //     context.commit('setRequests', {outgoing, incoming})
-        //     resolve();
-        // }else{
-        //     Notify.create({
-        //         message: "Error fetching requests.",
-        //         color: 'red'
-        //     })
-        //     reject();
-        // }
+        console.log(response.data.doc);
+        if(response.status === 201 || response.status === 200){
+            context.commit('setLogs', response.data.doc)
+            resolve();
+        }else{
+            Notify.create({
+                message: "Error fetching logs.",
+                color: 'red'
+            })
+            reject();
+        }
       })
       .catch(err => {
           Notify.create({
