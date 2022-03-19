@@ -9,7 +9,7 @@
         <div class="row justify-evenly text-subtitle2">
           <p class="text-negative q-my-auto  text-subtitle2" style="width: 31%;"> Completed </p>
             <!-- <div style="width: 39%">Oct /13/2021 <br> 10:30am.</div> -->
-          <q-btn label="Comments" no-caps class="bg-negative text-white text-subtitle2" style="width: 30%;"/>
+          <!-- <q-btn label="Comments" no-caps class="bg-negative text-white text-subtitle2" style="width: 30%;"/> -->
         </div>
       </q-item-section>
     </q-item>
