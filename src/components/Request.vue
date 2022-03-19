@@ -31,7 +31,7 @@
                 <!-- Incomings -->
                   <q-list separator v-for="incomingRequest in incomingRequests" :key="incomingRequest._id" >
                     <q-item clickable class="row text-center q-mb-sm bg-white" style="border-radius: 4px">
-                      <div class="row col-9" @click="this.$router.push(`/message/${incomingRequest._id}`)">
+                      <div class="row col-9" @click="this.$router.push(`/request-message/${incomingRequest._id}`)">
                         <q-item-section  >Request from {{incomingRequest.from.abbr}}</q-item-section>
                         <q-item-section>{{incomingRequest.title}} </q-item-section>
                         <q-item-section>{{incomingRequest.createdAt.split("T")[0]}}, {{incomingRequest.createdAt.split("T")[1].split(".")[0]}}</q-item-section>
@@ -55,7 +55,7 @@
                   <!-- Outgoings -->
                   <q-list separator v-for="outgoingRequest in outgoingRequests" :key="outgoingRequest._id" >
                     <q-item clickable class="row text-center q-mb-sm bg-white" style="border-radius: 4px">
-                      <div class="row col-9" @click="this.$router.push(`/message/${outgoingRequest._id}`)">
+                      <div class="row col-9" @click="this.$router.push(`/request-message/${outgoingRequest._id}`)">
                         <q-item-section  >Request to {{outgoingRequest.to.abbr}}</q-item-section>
                         <q-item-section>{{outgoingRequest.title}} </q-item-section>
                         <q-item-section>{{outgoingRequest.createdAt.split("T")[0]}}, {{outgoingRequest.createdAt.split("T")[1].split(".")[0]}}</q-item-section>
