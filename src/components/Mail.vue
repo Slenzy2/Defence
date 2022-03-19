@@ -27,11 +27,11 @@
                <q-scroll-area style="height: 59vh;">
                  <div class="text-subtitle2 text-secondary">
                 <!-- Incomings -->
-                 <q-list separator v-for="n in 2" :key="n" >
+                 <q-list separator v-for="item in inbox" :key="item._id" >
                   <q-item clickable class="row text-center q-mb-sm bg-white" to="/message" style="border-radius: 4px">
-                      <q-item-section  >Message from Lorem Dude</q-item-section>
-                      <q-item-section>Lorem ipsum dolor sit amet consectetur</q-item-section>
-                      <q-item-section>Oct /13/2021 : 10:30am.</q-item-section>
+                      <q-item-section  >Message from {{item.from.username}}</q-item-section>
+                      <q-item-section>{{item.title}}</q-item-section>
+                      <q-item-section>{{item.createdAt.split("T")[0]}}, {{item.createdAt.split("T")[1].split(".")[0]}}</q-item-section>
                   </q-item>
                 </q-list>
               </div>
@@ -42,11 +42,11 @@
               <q-scroll-area style="height: 59vh">
                 <div class="text-subtitle2 text-secondary">
                   <!-- Outgoings -->
-                  <q-list separator v-for="n in 3" :key="n" >
+                  <q-list separator v-for="item in sent" :key="item._id" >
                     <q-item clickable class="row text-center q-mb-sm bg-white" to="/message" style="border-radius: 4px">
-                        <q-item-section  >Message from Lorem Dude</q-item-section>
-                        <q-item-section>Network is not working and the windows </q-item-section>
-                        <q-item-section>Oct /13/2021 : 10:30am.</q-item-section>
+                        <q-item-section  >Message from {{item.from.username}}</q-item-section>
+                        <q-item-section>{{item.title}}</q-item-section>
+                        <q-item-section>{{item.createdAt.split("T")[0]}}, {{item.createdAt.split("T")[1].split(".")[0]}}</q-item-section>
                     </q-item>
                   </q-list>
                 </div>
@@ -85,7 +85,15 @@
             <q-card-section>
                 <div class="column">
                   <div class="bg-white col q-px-md column justify-between q-pb-md" style="height:300px;border-radius:0 0 4px 4px">
-                    <q-input v-model="to" label="To:" />
+                    <q-select  v-model="to" :options="users" use-input input-debounce="0" label="Select User"  >
+                      <template v-slot:no-option>
+                        <q-item>
+                          <q-item-section class="text-grey">
+                            No results
+                          </q-item-section>
+                        </q-item>
+                      </template>
+                    </q-select>
                     <q-input v-model="title" label="Title:" />
                     <q-input v-model="comments" type="textarea" placeholder="Message" />
                     <q-file
@@ -129,7 +137,7 @@ export default {
    components:{
     Watermark
   },
-  setup () {
+  data () {
     return {
       label: ref('inbox'),
       bar: ref(false),
@@ -141,10 +149,10 @@ export default {
       comments: ref(""),
       selectedFile: ref(null),
 
-      departments: [],
-      incomingRequests: [],
-      outgoingRequests: [],
+      inbox: [],
+      sent: [],
 
+      users: []
     }
   },
  methods: {
@@ -168,11 +176,7 @@ export default {
           files: this.selectedFile
         })
         .then(()=>{
-            Notify.create({
-              message: 'Mail succesfully sent.',
-              color: 'blue'
-            })
-            this.$router.replace('/request')
+          window.location.reload();
         })
       }else{
         Notify.create({
@@ -181,6 +185,29 @@ export default {
         })
       }
     },
+    fetchMails(){
+      this.$store.dispatch('defencestore/getMails')
+      .then(()=>{
+        let req = this.$store.getters['defencestore/getMails'];
+        this.inbox = req.inbox;
+        this.sent = req.sent;
+        // console.log(this.inbox)
+        // console.log(this.sent)
+      })
+    },
+    fetchUsersInDept(){
+      this.$store.dispatch('defencestore/getUsersInDepartment')
+      .then(()=>{
+        let req = this.$store.getters['defencestore/usersInDept'];
+        this.users = req;
+        console.log(this.users)
+      })
+    }
+  },
+  mounted(){
+    this.fetchMails();
+    this.fetchUsersInDept();
+    // console.log(this.users)
   }
 }
 </script>

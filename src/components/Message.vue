@@ -79,8 +79,6 @@
                 <div class="text-subtitle1">
                   <span class="text-bold text-grey" >From:</span> 
                   <span class="text-h6">{{from}}</span>
-                  <span class="text-bold text-grey" >To:</span> 
-                  <span class="text-h6">{{to}}</span>
                 </div>
 
               <!-- heading -->
@@ -119,7 +117,6 @@ export default {
       tab: ref('mails'),
       id: window.location.href.split('/')[window.location.href.split('/').length - 1],
       from: "",
-      to: "",
       title: "",
       text: ""
     }
@@ -128,10 +125,10 @@ export default {
     fetchMessage(){
       axios({
             method: "GET",
-            url: 'http://172.20.10.3:3000/api/user/request/'+this.id,
+            url: 'https://edefense.herokuapp.com/api/user/request/'+this.id,
             headers: {
               'Authorization': 'Bearer '+localStorage.getItem('userToken')
-            }
+          }
         })
         .then(response => {
             if(response.status === 201){
@@ -139,7 +136,6 @@ export default {
                 console.log(response.data.doc);
                 response = response.data.doc;
                 this.from = response.from.name;
-                this.to = response.to.name;
                 this.title = response.title;
                 this.text = response.message.body;
             }else{
