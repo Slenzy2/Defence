@@ -22,8 +22,22 @@ export default {
   name: 'Log',
   setup () {
     return {
-      val: ref(false)
+      val: ref(false),
+      logs: []
     }
+  },
+  methods: {
+    fetchLogs(){
+      this.$store.dispatch('defencestore/getLogs')
+      .then(()=>{
+        let req = this.$store.getters['defencestore/getLogs'];
+        // this.logs = req;
+      })
+    }
+  },
+  mounted(){
+    this.fetchLogs();
+
   }
 }
 </script>

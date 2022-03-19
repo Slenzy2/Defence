@@ -9,8 +9,9 @@ export function saveUserToken (state, payload) {
 
 export function getDepartments (state, payload) {
   let arr = [];
+  let userDept = localStorage.getItem("userDept");
   payload.departments.forEach(item => {
-    arr.push(item.abbr)
+    userDept !== item._id && arr.push(item.abbr)
   })
   console.log(arr)
   state.departments = arr;
@@ -19,6 +20,10 @@ export function getDepartments (state, payload) {
 export function setRequests (state, payload) {
   state.outgoingRequests = payload.outgoing;
   state.incomingRequests = payload.incoming;
+}
+
+export function getLogs (state, payload) {
+  state.logs = payload;
 }
 
 export function logout(state){

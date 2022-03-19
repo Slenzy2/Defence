@@ -1,7 +1,6 @@
 
 import { Notify } from 'quasar';
 import axios from 'axios';
-import { useRoute } from 'vue-router';
 import env from '../../../env.js';
 
 // const route = useRoute();
@@ -122,31 +121,26 @@ export function sendRequest (context, data) {
     })
     .then(response => {
       console.log(response);
-      /*if(response.status === 201){
-          let token = response.data.token;
-          localStorage.setItem('userToken', token);
-          context.commit('saveToken', {token})
-          Notify.create({
-              message: 'Login Success.',
-              caption: 'User successfully authenticated.',
-              color: 'blue'
-          })
-          resolve();
+      if(response.status === 201){
+        Notify.create({
+            message: "Request successfully sent.",
+            color: 'blue'
+        })
+        resolve();
       }else{
           Notify.create({
-              message: "Login Failure.",
-              caption: "Authentication error, check credentials.",
+              message: "Error sending request. Please retry.",
               color: 'red'
           })
           reject();
-      }*/
+      }
     })
     .catch(err => {
         Notify.create({
-            message: 'Login Failure.',
-            caption: "Authentication error, check credentials.",
+            message: 'Error sending request. Please retry.',
             color: 'red'
         })
+        reject();
     })
   })
 
@@ -202,7 +196,7 @@ export function getRequests (context, data) {
             let userDept = localStorage.getItem('userDept');
             let requests = response.data.doc;
             requests.forEach(item => {
-                if(item._id === userDept){
+                if(item.from._id === userDept){
                     outgoing.push(item);
                 }else{
                     incoming.push(item);
@@ -267,6 +261,49 @@ export function sendMail (context, data) {
       .catch(err => {
           Notify.create({
               message: 'Error sending mail.',
+              color: 'red'
+          })
+      })
+    })
+
+}
+
+export function getLogs (context, data) {
+    return new Promise((resolve, reject) => {
+      axios({
+        method: "GET",
+        url: baseurl + '/user/logs',
+        headers: {
+          'Authorization': 'Bearer '+localStorage.getItem('userToken')
+        }
+      })
+      .then(response => {
+        console.log(response.data);
+        // if(response.status === 201 || response.status === 200){
+        //     let outgoing = [];
+        //     let incoming = [];
+        //     let userDept = localStorage.getItem('userDept');
+        //     let requests = response.data.doc;
+        //     requests.forEach(item => {
+        //         if(item._id === userDept){
+        //             outgoing.push(item);
+        //         }else{
+        //             incoming.push(item);
+        //         }
+        //     });
+        //     context.commit('setRequests', {outgoing, incoming})
+        //     resolve();
+        // }else{
+        //     Notify.create({
+        //         message: "Error fetching requests.",
+        //         color: 'red'
+        //     })
+        //     reject();
+        // }
+      })
+      .catch(err => {
+          Notify.create({
+              message: 'Error fetching logs.',
               color: 'red'
           })
       })

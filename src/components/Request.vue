@@ -32,14 +32,14 @@
                   <q-list separator v-for="incomingRequest in incomingRequests" :key="incomingRequest._id" >
                     <q-item clickable class="row text-center q-mb-sm bg-white" style="border-radius: 4px">
                       <div class="row col-9" @click="this.$router.push(`/message/${incomingRequest._id}`)">
-                        <q-item-section  >Request to DDA</q-item-section>
-                        <q-item-section>Network is not working and the windows </q-item-section>
-                        <q-item-section>Oct /13/2021 : 10:30am.</q-item-section>
+                        <q-item-section  >Request from {{incomingRequest.from.abbr}}</q-item-section>
+                        <q-item-section>{{incomingRequest.title}} </q-item-section>
+                        <q-item-section>{{incomingRequest.createdAt.split("T")[0]}}, {{incomingRequest.createdAt.split("T")[1].split(".")[0]}}</q-item-section>
                       </div>
 
                       <q-item-section>
                         <div class="row justify-evenly" style="width">
-                          <span class=" text-negative q-my-auto text-subtitle2" style="width: 40%;"> Pending</span>
+                          <span class=" text-negative q-my-auto text-subtitle2" style="width: 40%;"> {{incomingRequest.metaData.status}}</span>
                           <!-- <q-btn label="Comments" class="bg-negative text-white text-subtitle2" style="width: 40%;"/> -->
                         </div>
                       </q-item-section>
@@ -55,15 +55,15 @@
                   <!-- Outgoings -->
                   <q-list separator v-for="outgoingRequest in outgoingRequests" :key="outgoingRequest._id" >
                     <q-item clickable class="row text-center q-mb-sm bg-white" style="border-radius: 4px">
-                      <div class="row col-9 cursor-pointer"  @click="this.$router.push(`/message/${outgoingRequest._id}`)">
-                        <q-item-section  >Request to DDA</q-item-section>
-                        <q-item-section>Network is not working and the windows </q-item-section>
-                        <q-item-section>Oct /13/2021 : 10:30am.</q-item-section>
+                      <div class="row col-9" @click="this.$router.push(`/message/${outgoingRequest._id}`)">
+                        <q-item-section  >Request to {{outgoingRequest.to.abbr}}</q-item-section>
+                        <q-item-section>{{outgoingRequest.title}} </q-item-section>
+                        <q-item-section>{{outgoingRequest.createdAt.split("T")[0]}}, {{outgoingRequest.createdAt.split("T")[1].split(".")[0]}}</q-item-section>
                       </div>
 
                       <q-item-section>
                         <div class="row justify-evenly" style="width">
-                          <span class=" text-negative q-my-auto text-subtitle2" style="width: 40%;"> Pending</span>
+                          <span class=" text-negative q-my-auto text-subtitle2" style="width: 40%;"> {{outgoingRequest.metaData.status}}</span>
                           <!-- <q-btn label="Comments" class="bg-negative text-white text-subtitle2" style="width: 40%;"/> -->
                         </div>
                       </q-item-section>
@@ -206,11 +206,8 @@ export default {
           reference: ref
         })
         .then(()=>{
-            Notify.create({
-              message: 'Request successfully sent.',
-              color: 'blue'
-            })
-            this.$router.replace('/request')
+          window.location.reload();
+            // this.$router.replace('/request')
         })
       }else{
         Notify.create({
@@ -234,7 +231,7 @@ export default {
       })
     }
   },
-  async mounted(){
+  mounted(){
     this.fetchDepartments();
     // this.departments = await this.$store.getters['defencestore/getDepartments']
     this.fetchRequests();

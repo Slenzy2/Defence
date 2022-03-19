@@ -7,3 +7,7 @@ export function getDepartments (state) {
 export function getRequests (state) {
   return ({ incoming: state.incomingRequests, outgoing: state.outgoingRequests });
 }
+
+export function getLogs (state) {
+  return state.logs;
+}

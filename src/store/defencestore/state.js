@@ -4,7 +4,8 @@ export default function () {
     userToken: null,
     departments: [],
     outgoingRequests: [],
-    incomingRequests: []
+    incomingRequests: [],
+    logs: []
 
   }
 }

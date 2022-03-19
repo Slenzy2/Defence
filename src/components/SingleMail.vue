@@ -3,13 +3,6 @@
 
       <div class="start">
 
-      <!-- Water Marked Image  -->
-        <!-- <Watermark /> -->
-
-
-
-
-        <!-- MetaData -->
         <q-drawer
             side="right"
             v-model="drawerRight"
